@@ -1656,7 +1656,14 @@ _.info = {
         return '';
     },
 
+<<<<<<< HEAD
     properties: function () {
+=======
+    properties: function(extra_props) {
+        if (typeof extra_props !== 'object') {
+            extra_props = {};
+        }
+>>>>>>> af6791e (Expose init option to supply mp_loader value)
         return _.extend(_.strip_empty_properties({
             '$os': _.info.os(),
             '$browser': _.info.browser(userAgent, navigator.vendor, windowOpera),
@@ -1674,7 +1681,7 @@ _.info = {
             '$lib_version': Config.LIB_VERSION,
             '$insert_id': cheap_guid(),
             'time': _.timestamp() / 1000 // epoch time in seconds
-        });
+        }, _.strip_empty_properties(extra_props));
     },
 
     people_properties: function () {
@@ -4188,6 +4195,7 @@ var DEFAULT_API_ROUTES = {
  * Module-level globals
  */
 var DEFAULT_CONFIG = {
+<<<<<<< HEAD
     'api_host': 'https://api-js.mixpanel.com',
     'api_routes': DEFAULT_API_ROUTES,
     'api_method': 'POST',
@@ -4221,6 +4229,41 @@ var DEFAULT_CONFIG = {
     'ip': true,
     'opt_out_tracking_by_default': false,
     'opt_out_persistence_by_default': false,
+=======
+    'api_host':                          'https://api-js.mixpanel.com',
+    'api_method':                        'POST',
+    'api_transport':                     'XHR',
+    'api_payload_format':                PAYLOAD_TYPE_BASE64,
+    'app_host':                          'https://mixpanel.com',
+    'cdn':                               'https://cdn.mxpnl.com',
+    'cross_site_cookie':                 false,
+    'cross_subdomain_cookie':            true,
+    'error_reporter':                    NOOP_FUNC,
+    'persistence':                       'cookie',
+    'persistence_name':                  '',
+    'cookie_domain':                     '',
+    'cookie_name':                       '',
+    'loaded':                            NOOP_FUNC,
+    'mp_loader':                         null,
+    'track_marketing':                   true,
+    'track_pageview':                    false,
+    'skip_first_touch_marketing':        false,
+    'store_google':                      true,
+    'save_referrer':                     true,
+    'test':                              false,
+    'verbose':                           false,
+    'img':                               false,
+    'debug':                             false,
+    'track_links_timeout':               300,
+    'cookie_expiration':                 365,
+    'upgrade':                           false,
+    'disable_persistence':               false,
+    'disable_cookie':                    false,
+    'secure_cookie':                     false,
+    'ip':                                true,
+    'opt_out_tracking_by_default':       false,
+    'opt_out_persistence_by_default':    false,
+>>>>>>> af6791e (Expose init option to supply mp_loader value)
     'opt_out_tracking_persistence_type': 'localStorage',
     'opt_out_tracking_cookie_prefix': null,
     'property_blacklist': [],
@@ -4962,7 +5005,7 @@ MixpanelLib.prototype.track = addOptOutCheckMixpanelLib(function (event_name, pr
     // update properties with pageview info and super-properties
     properties = _.extend(
         {},
-        _.info.properties(),
+        _.info.properties({'mp_loader': this.get_config('mp_loader')}),
         marketing_properties,
         this['persistence'].properties(),
         this.unpersisted_superprops,
