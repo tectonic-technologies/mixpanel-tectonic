@@ -3245,7 +3245,6 @@ define(function () { 'use strict';
         data[SET_ACTION] = _.extend(
             {},
             _.info.people_properties(),
-            this._mixpanel['persistence'].get_referrer_info(),
             data[SET_ACTION]
         );
         return this._send_request(data, callback);
@@ -4451,6 +4450,7 @@ define(function () { 'use strict';
     MixpanelLib.prototype._loaded = function () {
         this.get_config('loaded')(this);
         this._set_default_superprops();
+        this['people'].set_once(this['persistence'].get_referrer_info());
     };
 
     // update persistence with info on referrer, UTM params, etc
