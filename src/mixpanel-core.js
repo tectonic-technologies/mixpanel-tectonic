@@ -356,6 +356,17 @@ MixpanelLib.prototype._loaded = function () {
     this.get_config('loaded')(this);
     this._set_default_superprops();
     this['people'].set_once(this['persistence'].get_referrer_info());
+
+    // The original 'store_google' functionality is deprecated and the config is
+    // now used to clear previously managed UTM parameters from persistence
+    if (this.get_config('store_google')) {
+        var utm_params = _.info.campaignParams(null);
+        _.each(utm_params, function (_utm_value, utm_key) {
+            // We need to unregister persisted UTM parameters so old values
+            // are not mixed with the new UTM parameters
+            this.unregister(utm_key);
+        }.bind(this));
+    }
 };
 
 // update persistence with info on referrer, UTM params, etc
@@ -399,7 +410,7 @@ MixpanelLib.prototype._track_dom = function (DomClass, args) {
     return dt.track.apply(dt, args);
 };
 
-MixpanelLib.prototype._init_url_change_tracking = function(track_pageview_option) {
+MixpanelLib.prototype._init_url_change_tracking = function (track_pageview_option) {
     var previous_tracked_url = '';
     var tracked = this.track_pageview();
     if (tracked) {
@@ -407,27 +418,27 @@ MixpanelLib.prototype._init_url_change_tracking = function(track_pageview_option
     }
 
     if (_.include(['full-url', 'url-with-path-and-query-string', 'url-with-path'], track_pageview_option)) {
-        window.addEventListener('popstate', function() {
+        window.addEventListener('popstate', function () {
             window.dispatchEvent(new Event('mp_locationchange'));
         });
-        window.addEventListener('hashchange', function() {
+        window.addEventListener('hashchange', function () {
             window.dispatchEvent(new Event('mp_locationchange'));
         });
         var nativePushState = window.history.pushState;
         if (typeof nativePushState === 'function') {
-            window.history.pushState = function(state, unused, url) {
+            window.history.pushState = function (state, unused, url) {
                 nativePushState.call(window.history, state, unused, url);
                 window.dispatchEvent(new Event('mp_locationchange'));
             };
         }
         var nativeReplaceState = window.history.replaceState;
         if (typeof nativeReplaceState === 'function') {
-            window.history.replaceState = function(state, unused, url) {
+            window.history.replaceState = function (state, unused, url) {
                 nativeReplaceState.call(window.history, state, unused, url);
                 window.dispatchEvent(new Event('mp_locationchange'));
             };
         }
-        window.addEventListener('mp_locationchange', function() {
+        window.addEventListener('mp_locationchange', function () {
             var current_url = _.info.currentUrl();
             var should_track = false;
             if (track_pageview_option === 'full-url') {
