@@ -1553,6 +1553,13 @@ MixpanelLib.prototype.track = (0, _gdprUtils.addOptOutCheckMixpanelLib)(function
     return ret;
 });
 
+// Tectonic apps specific method
+MixpanelLib.prototype.get_properties = function () {
+    var properties = _utils._.extend({}, _utils._.info.properties(), _utils._.info.marketingParams(), this['persistence'].properties(), this.unpersisted_superprops);
+
+    return properties;
+};
+
 /**
  * Register the current user into one/many groups.
  *
@@ -2634,6 +2641,7 @@ MixpanelLib.prototype['track_with_groups'] = MixpanelLib.prototype.track_with_gr
 MixpanelLib.prototype['start_batch_senders'] = MixpanelLib.prototype.start_batch_senders;
 MixpanelLib.prototype['stop_batch_senders'] = MixpanelLib.prototype.stop_batch_senders;
 MixpanelLib.prototype['DEFAULT_API_ROUTES'] = DEFAULT_API_ROUTES;
+MixpanelLib.prototype['get_properties'] = MixpanelLib.prototype.get_properties;
 
 // MixpanelPersistence Exports
 _mixpanelPersistence.MixpanelPersistence.prototype['properties'] = _mixpanelPersistence.MixpanelPersistence.prototype.properties;
