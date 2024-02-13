@@ -1673,14 +1673,18 @@ _.info = {
     },
 
     mpPageViewProperties: function () {
-        return _.strip_empty_properties({
+        var defaultProps = _.strip_empty_properties({
             'current_page_title': document.title,
             'current_domain': win.location.hostname,
             'current_url_path': win.location.pathname,
             'current_url_protocol': win.location.protocol,
-            'current_url_search': win.location.search,
-            'current_url_params': _.getAllQueryParams(win.location.search)
+            'current_url_search': win.location.search
         });
+        var URLParams = _.getAllQueryParams(win.location.search);
+        if (!_.isEmptyObject(URLParams)) {
+            defaultProps['current_url_params'] = URLParams;
+        }
+        return defaultProps;
     }
 };
 

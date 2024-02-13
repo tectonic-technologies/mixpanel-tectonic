@@ -1675,14 +1675,18 @@ _.info = {
     },
 
     mpPageViewProperties: function () {
-        return _.strip_empty_properties({
+        var defaultProps = _.strip_empty_properties({
             'current_page_title': document$1.title,
             'current_domain': window$1.location.hostname,
             'current_url_path': window$1.location.pathname,
             'current_url_protocol': window$1.location.protocol,
-            'current_url_search': window$1.location.search,
-            'current_url_params': _.getAllQueryParams(window$1.location.search)
+            'current_url_search': window$1.location.search
         });
+        var URLParams = _.getAllQueryParams(window$1.location.search);
+        if (!_.isEmptyObject(URLParams)) {
+            defaultProps['current_url_params'] = URLParams;
+        }
+        return defaultProps;
     }
 };
 
@@ -3882,8 +3886,7 @@ MixpanelPersistence.prototype.update_referrer_info = function (referrer) {
     // If referrer doesn't exist, we want to note the fact that it was type-in traffic.
     var routerReferrer = null;
     try {
-        routerReferrer = _.cookie.get('_tt_heimdall_referrer');
-        _.cookie.remove('_tt_heimdall_referrer');
+        routerReferrer = _.cookie.get('__tt_heimdall_referrer');
     } catch (err) {
         console.error('Error in getting router referrer, hence skipping');
     }

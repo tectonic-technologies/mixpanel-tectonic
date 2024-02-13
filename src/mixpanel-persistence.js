@@ -240,8 +240,7 @@ MixpanelPersistence.prototype.update_referrer_info = function (referrer) {
     // If referrer doesn't exist, we want to note the fact that it was type-in traffic.
     var routerReferrer = null;
     try {
-        routerReferrer = _.cookie.get('_tt_heimdall_referrer');
-        _.cookie.remove('_tt_heimdall_referrer');
+        routerReferrer = _.cookie.get('__tt_heimdall_referrer');
     } catch (err) {
         console.error('Error in getting router referrer, hence skipping');
     }
