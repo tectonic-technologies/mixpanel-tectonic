@@ -11,7 +11,7 @@
 
     // since es6 imports are static and we run unit tests from the console, window won't be defined when importing this file
     var window$1;
-    if (typeof(window) === 'undefined') {
+    if (typeof (window) === 'undefined') {
         var loc = {
             hostname: ''
         };
@@ -52,7 +52,7 @@
     var nativeIsArray = Array.isArray;
     var breaker = {};
     var _ = {
-        trim: function(str) {
+        trim: function (str) {
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill
             return str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
         }
@@ -61,51 +61,51 @@
     // Console override
     var console = {
         /** @type {function(...*)} */
-        log: function() {
+        log: function () {
             if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {
                 try {
                     windowConsole.log.apply(windowConsole, arguments);
                 } catch (err) {
-                    _.each(arguments, function(arg) {
+                    _.each(arguments, function (arg) {
                         windowConsole.log(arg);
                     });
                 }
             }
         },
         /** @type {function(...*)} */
-        warn: function() {
+        warn: function () {
             if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {
                 var args = ['Mixpanel warning:'].concat(_.toArray(arguments));
                 try {
                     windowConsole.warn.apply(windowConsole, args);
                 } catch (err) {
-                    _.each(args, function(arg) {
+                    _.each(args, function (arg) {
                         windowConsole.warn(arg);
                     });
                 }
             }
         },
         /** @type {function(...*)} */
-        error: function() {
+        error: function () {
             if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {
                 var args = ['Mixpanel error:'].concat(_.toArray(arguments));
                 try {
                     windowConsole.error.apply(windowConsole, args);
                 } catch (err) {
-                    _.each(args, function(arg) {
+                    _.each(args, function (arg) {
                         windowConsole.error(arg);
                     });
                 }
             }
         },
         /** @type {function(...*)} */
-        critical: function() {
+        critical: function () {
             if (!_.isUndefined(windowConsole) && windowConsole) {
                 var args = ['Mixpanel error:'].concat(_.toArray(arguments));
                 try {
                     windowConsole.error.apply(windowConsole, args);
                 } catch (err) {
-                    _.each(args, function(arg) {
+                    _.each(args, function (arg) {
                         windowConsole.error(arg);
                     });
                 }
@@ -113,13 +113,13 @@
         }
     };
 
-    var log_func_with_prefix = function(func, prefix) {
-        return function() {
+    var log_func_with_prefix = function (func, prefix) {
+        return function () {
             arguments[0] = '[' + prefix + '] ' + arguments[0];
             return func.apply(console, arguments);
         };
     };
-    var console_with_prefix = function(prefix) {
+    var console_with_prefix = function (prefix) {
         return {
             log: log_func_with_prefix(console.log, prefix),
             error: log_func_with_prefix(console.error, prefix),
@@ -130,7 +130,7 @@
 
     // UNDERSCORE
     // Embed part of the Underscore Library
-    _.bind = function(func, context) {
+    _.bind = function (func, context) {
         var args, bound;
         if (nativeBind && func.bind === nativeBind) {
             return nativeBind.apply(func, slice.call(arguments, 1));
@@ -139,7 +139,7 @@
             throw new TypeError();
         }
         args = slice.call(arguments, 2);
-        bound = function() {
+        bound = function () {
             if (!(this instanceof bound)) {
                 return func.apply(context, args.concat(slice.call(arguments)));
             }
@@ -161,7 +161,7 @@
      * @param {function(...*)=} iterator
      * @param {Object=} context
      */
-    _.each = function(obj, iterator, context) {
+    _.each = function (obj, iterator, context) {
         if (obj === null || obj === undefined) {
             return;
         }
@@ -184,8 +184,8 @@
         }
     };
 
-    _.extend = function(obj) {
-        _.each(slice.call(arguments, 1), function(source) {
+    _.extend = function (obj) {
+        _.each(slice.call(arguments, 1), function (source) {
             for (var prop in source) {
                 if (source[prop] !== void 0) {
                     obj[prop] = source[prop];
@@ -195,14 +195,14 @@
         return obj;
     };
 
-    _.isArray = nativeIsArray || function(obj) {
+    _.isArray = nativeIsArray || function (obj) {
         return toString.call(obj) === '[object Array]';
     };
 
     // from a comment on http://dbj.org/dbj/?p=286
     // fails on only one very rare and deliberate custom object:
     // var bomb = { toString : undefined, valueOf: function(o) { return "function BOMBA!"; }};
-    _.isFunction = function(f) {
+    _.isFunction = function (f) {
         try {
             return /^\s*\bfunction\b/.test(f);
         } catch (x) {
@@ -210,11 +210,11 @@
         }
     };
 
-    _.isArguments = function(obj) {
+    _.isArguments = function (obj) {
         return !!(obj && hasOwnProperty.call(obj, 'callee'));
     };
 
-    _.toArray = function(iterable) {
+    _.toArray = function (iterable) {
         if (!iterable) {
             return [];
         }
@@ -230,41 +230,41 @@
         return _.values(iterable);
     };
 
-    _.map = function(arr, callback, context) {
+    _.map = function (arr, callback, context) {
         if (nativeMap && arr.map === nativeMap) {
             return arr.map(callback, context);
         } else {
             var results = [];
-            _.each(arr, function(item) {
+            _.each(arr, function (item) {
                 results.push(callback.call(context, item));
             });
             return results;
         }
     };
 
-    _.keys = function(obj) {
+    _.keys = function (obj) {
         var results = [];
         if (obj === null) {
             return results;
         }
-        _.each(obj, function(value, key) {
+        _.each(obj, function (value, key) {
             results[results.length] = key;
         });
         return results;
     };
 
-    _.values = function(obj) {
+    _.values = function (obj) {
         var results = [];
         if (obj === null) {
             return results;
         }
-        _.each(obj, function(value) {
+        _.each(obj, function (value) {
             results[results.length] = value;
         });
         return results;
     };
 
-    _.include = function(obj, target) {
+    _.include = function (obj, target) {
         var found = false;
         if (obj === null) {
             return found;
@@ -272,7 +272,7 @@
         if (nativeIndexOf && obj.indexOf === nativeIndexOf) {
             return obj.indexOf(target) != -1;
         }
-        _.each(obj, function(value) {
+        _.each(obj, function (value) {
             if (found || (found = (value === target))) {
                 return breaker;
             }
@@ -280,23 +280,23 @@
         return found;
     };
 
-    _.includes = function(str, needle) {
+    _.includes = function (str, needle) {
         return str.indexOf(needle) !== -1;
     };
 
     // Underscore Addons
-    _.inherit = function(subclass, superclass) {
+    _.inherit = function (subclass, superclass) {
         subclass.prototype = new superclass();
         subclass.prototype.constructor = subclass;
         subclass.superclass = superclass.prototype;
         return subclass;
     };
 
-    _.isObject = function(obj) {
+    _.isObject = function (obj) {
         return (obj === Object(obj) && !_.isArray(obj));
     };
 
-    _.isEmptyObject = function(obj) {
+    _.isEmptyObject = function (obj) {
         if (_.isObject(obj)) {
             for (var key in obj) {
                 if (hasOwnProperty.call(obj, key)) {
@@ -308,28 +308,28 @@
         return false;
     };
 
-    _.isUndefined = function(obj) {
+    _.isUndefined = function (obj) {
         return obj === void 0;
     };
 
-    _.isString = function(obj) {
+    _.isString = function (obj) {
         return toString.call(obj) == '[object String]';
     };
 
-    _.isDate = function(obj) {
+    _.isDate = function (obj) {
         return toString.call(obj) == '[object Date]';
     };
 
-    _.isNumber = function(obj) {
+    _.isNumber = function (obj) {
         return toString.call(obj) == '[object Number]';
     };
 
-    _.isElement = function(obj) {
+    _.isElement = function (obj) {
         return !!(obj && obj.nodeType === 1);
     };
 
-    _.encodeDates = function(obj) {
-        _.each(obj, function(v, k) {
+    _.encodeDates = function (obj) {
+        _.each(obj, function (v, k) {
             if (_.isDate(v)) {
                 obj[k] = _.formatDate(v);
             } else if (_.isObject(v)) {
@@ -339,14 +339,14 @@
         return obj;
     };
 
-    _.timestamp = function() {
-        Date.now = Date.now || function() {
+    _.timestamp = function () {
+        Date.now = Date.now || function () {
             return +new Date;
         };
         return Date.now();
     };
 
-    _.formatDate = function(d) {
+    _.formatDate = function (d) {
         // YYYY-MM-DDTHH:MM:SS in UTC
         function pad(n) {
             return n < 10 ? '0' + n : n;
@@ -359,9 +359,9 @@
             pad(d.getUTCSeconds());
     };
 
-    _.strip_empty_properties = function(p) {
+    _.strip_empty_properties = function (p) {
         var ret = {};
-        _.each(p, function(v, k) {
+        _.each(p, function (v, k) {
             if (_.isString(v) && v.length > 0) {
                 ret[k] = v;
             }
@@ -374,19 +374,19 @@
      * passed an Array or Object it will iterate through obj and
      * truncate all the values recursively.
      */
-    _.truncate = function(obj, length) {
+    _.truncate = function (obj, length) {
         var ret;
 
-        if (typeof(obj) === 'string') {
+        if (typeof (obj) === 'string') {
             ret = obj.slice(0, length);
         } else if (_.isArray(obj)) {
             ret = [];
-            _.each(obj, function(val) {
+            _.each(obj, function (val) {
                 ret.push(_.truncate(val, length));
             });
         } else if (_.isObject(obj)) {
             ret = {};
-            _.each(obj, function(val, key) {
+            _.each(obj, function (val, key) {
                 ret[key] = _.truncate(val, length);
             });
         } else {
@@ -396,10 +396,10 @@
         return ret;
     };
 
-    _.JSONEncode = (function() {
-        return function(mixed_val) {
+    _.JSONEncode = (function () {
+        return function (mixed_val) {
             var value = mixed_val;
-            var quote = function(string) {
+            var quote = function (string) {
                 var escapable = /[\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g; // eslint-disable-line no-control-regex
                 var meta = { // table of character substitutions
                     '\b': '\\b',
@@ -413,7 +413,7 @@
 
                 escapable.lastIndex = 0;
                 return escapable.test(string) ?
-                    '"' + string.replace(escapable, function(a) {
+                    '"' + string.replace(escapable, function (a) {
                         var c = meta[a];
                         return typeof c === 'string' ? c :
                             '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
@@ -421,7 +421,7 @@
                     '"' + string + '"';
             };
 
-            var str = function(key, holder) {
+            var str = function (key, holder) {
                 var gap = '';
                 var indent = '    ';
                 var i = 0; // The loop counter.
@@ -482,8 +482,8 @@
                             // brackets.
                             v = partial.length === 0 ? '[]' :
                                 gap ? '[\n' + gap +
-                                partial.join(',\n' + gap) + '\n' +
-                                mind + ']' :
+                                    partial.join(',\n' + gap) + '\n' +
+                                    mind + ']' :
                                     '[' + partial.join(',') + ']';
                             gap = mind;
                             return v;
@@ -503,7 +503,7 @@
                         // and wrap them in braces.
                         v = partial.length === 0 ? '{}' :
                             gap ? '{' + partial.join(',') + '' +
-                            mind + '}' : '{' + partial.join(',') + '}';
+                                mind + '}' : '{' + partial.join(',') + '}';
                         gap = mind;
                         return v;
                 }
@@ -521,7 +521,7 @@
      * From https://github.com/douglascrockford/JSON-js/blob/master/json_parse.js
      * Slightly modified to throw a real Error rather than a POJO
      */
-    _.JSONDecode = (function() {
+    _.JSONDecode = (function () {
         var at, // The index of the current character
             ch, // The current character
             escapee = {
@@ -535,13 +535,13 @@
                 't': '\t'
             },
             text,
-            error = function(m) {
+            error = function (m) {
                 var e = new SyntaxError(m);
                 e.at = at;
                 e.text = text;
                 throw e;
             },
-            next = function(c) {
+            next = function (c) {
                 // If a c parameter is provided, verify that it matches the current character.
                 if (c && c !== ch) {
                     error('Expected \'' + c + '\' instead of \'' + ch + '\'');
@@ -552,7 +552,7 @@
                 at += 1;
                 return ch;
             },
-            number = function() {
+            number = function () {
                 // Parse a number value.
                 var number,
                     string = '';
@@ -591,7 +591,7 @@
                 }
             },
 
-            string = function() {
+            string = function () {
                 // Parse a string value.
                 var hex,
                     i,
@@ -628,13 +628,13 @@
                 }
                 error('Bad string');
             },
-            white = function() {
+            white = function () {
                 // Skip whitespace.
                 while (ch && ch <= ' ') {
                     next();
                 }
             },
-            word = function() {
+            word = function () {
                 // true, false, or null.
                 switch (ch) {
                     case 't':
@@ -660,7 +660,7 @@
                 error('Unexpected "' + ch + '"');
             },
             value, // Placeholder for the value function.
-            array = function() {
+            array = function () {
                 // Parse an array value.
                 var array = [];
 
@@ -684,7 +684,7 @@
                 }
                 error('Bad array');
             },
-            object = function() {
+            object = function () {
                 // Parse an object value.
                 var key,
                     object = {};
@@ -716,7 +716,7 @@
                 error('Bad object');
             };
 
-        value = function() {
+        value = function () {
             // Parse a JSON value. It could be an object, an array, a string,
             // a number, or a word.
             white();
@@ -736,7 +736,7 @@
 
         // Return the json_parse function. It will have access to all of the
         // above functions and variables.
-        return function(source) {
+        return function (source) {
             var result;
 
             text = source;
@@ -752,7 +752,7 @@
         };
     })();
 
-    _.base64Encode = function(data) {
+    _.base64Encode = function (data) {
         var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
         var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
             ac = 0,
@@ -795,7 +795,7 @@
         return enc;
     };
 
-    _.utf8Encode = function(string) {
+    _.utf8Encode = function (string) {
         string = (string + '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
         var utftext = '',
@@ -834,10 +834,10 @@
         return utftext;
     };
 
-    _.UUID = (function() {
+    _.UUID = (function () {
 
         // Time-based entropy
-        var T = function() {
+        var T = function () {
             var time = 1 * new Date(); // cross-browser version of Date.now()
             var ticks;
             if (window$1.performance && window$1.performance.now) {
@@ -857,7 +857,7 @@
         };
 
         // Math.Random entropy
-        var R = function() {
+        var R = function () {
             return Math.random().toString(16).replace('.', '');
         };
 
@@ -865,7 +865,7 @@
         // This function takes the user agent string, and then xors
         // together each sequence of 8 bytes.  This produces a final
         // sequence of 8 bytes which it returns as hex.
-        var UA = function() {
+        var UA = function () {
             var ua = userAgent,
                 i, ch, buffer = [],
                 ret = 0;
@@ -894,7 +894,7 @@
             return ret.toString(16);
         };
 
-        return function() {
+        return function () {
             var se = (screen.height * screen.width).toString(16);
             return (T() + '-' + R() + '-' + UA() + '-' + se + '-' + T());
         };
@@ -930,7 +930,7 @@
         'mediapartners-google',
         'storebot-google'
     ];
-    _.isBlockedUA = function(ua) {
+    _.isBlockedUA = function (ua) {
         var i;
         ua = ua.toLowerCase();
         for (i = 0; i < BLOCKED_UA_STRS.length; i++) {
@@ -945,14 +945,14 @@
      * @param {Object=} formdata
      * @param {string=} arg_separator
      */
-    _.HTTPBuildQuery = function(formdata, arg_separator) {
+    _.HTTPBuildQuery = function (formdata, arg_separator) {
         var use_val, use_key, tmp_arr = [];
 
         if (_.isUndefined(arg_separator)) {
             arg_separator = '&';
         }
 
-        _.each(formdata, function(val, key) {
+        _.each(formdata, function (val, key) {
             use_val = encodeURIComponent(val.toString());
             use_key = encodeURIComponent(key);
             tmp_arr[tmp_arr.length] = use_key + '=' + use_val;
@@ -961,20 +961,45 @@
         return tmp_arr.join(arg_separator);
     };
 
-    _.getQueryParam = function(url, param) {
+    _.getAllQueryParams = function (queryString) {
+        var params = {};
+        try {
+            if (!_.isUndefined(queryString)) {
+                var hashes = queryString.slice(queryString.indexOf('?') + 1).split('&');
+                _.each(hashes, function (hash) {
+                    var P = hash.split('=', 2);
+                    var key, value = null;
+                    try {
+                        if (P.length == 2) {
+                            key = decodeURIComponent(P[0]);
+                            value = decodeURIComponent(P[1]);
+                            params[key] = value;
+                        }
+                    } catch (err) {
+                        console.error('Skipping decoding for malformed query param: ' + value + ' with key ' + key);
+                    }
+                });
+            }
+        } catch (err) {
+            console.error('getAllQueryParams failed for query: ' + queryString);
+        }
+        return params;
+    };
+
+    _.getQueryParam = function (url, param) {
         // Expects a raw URL
 
         param = param.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
         var regexS = '[\\?&]' + param + '=([^&#]*)',
             regex = new RegExp(regexS),
             results = regex.exec(url);
-        if (results === null || (results && typeof(results[1]) !== 'string' && results[1].length)) {
+        if (results === null || (results && typeof (results[1]) !== 'string' && results[1].length)) {
             return '';
         } else {
             var result = results[1];
             try {
                 result = decodeURIComponent(result);
-            } catch(err) {
+            } catch (err) {
                 console.error('Skipping decoding for malformed query param: ' + result);
             }
             return result.replace(/\+/g, ' ');
@@ -985,7 +1010,7 @@
     // _.cookie
     // Methods partially borrowed from quirksmode.org/js/cookies.html
     _.cookie = {
-        get: function(name) {
+        get: function (name) {
             var nameEQ = name + '=';
             var ca = document$1.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
@@ -1000,7 +1025,7 @@
             return null;
         },
 
-        parse: function(name) {
+        parse: function (name) {
             var cookie;
             try {
                 cookie = _.JSONDecode(_.cookie.get(name)) || {};
@@ -1010,7 +1035,7 @@
             return cookie;
         },
 
-        set_seconds: function(name, value, seconds, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
+        set_seconds: function (name, value, seconds, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
             var cdomain = '',
                 expires = '',
                 secure = '';
@@ -1039,7 +1064,7 @@
             document$1.cookie = name + '=' + encodeURIComponent(value) + expires + '; path=/' + cdomain + secure;
         },
 
-        set: function(name, value, days, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
+        set: function (name, value, days, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
             var cdomain = '', expires = '', secure = '';
 
             if (domain_override) {
@@ -1068,13 +1093,13 @@
             return new_cookie_val;
         },
 
-        remove: function(name, is_cross_subdomain, domain_override) {
+        remove: function (name, is_cross_subdomain, domain_override) {
             _.cookie.set(name, '', -1, is_cross_subdomain, false, false, domain_override);
         }
     };
 
     var _localStorageSupported = null;
-    var localStorageSupported = function(storage, forceCheck) {
+    var localStorageSupported = function (storage, forceCheck) {
         if (_localStorageSupported !== null && !forceCheck) {
             return _localStorageSupported;
         }
@@ -1099,7 +1124,7 @@
 
     // _.localStorage
     _.localStorage = {
-        is_supported: function(force_check) {
+        is_supported: function (force_check) {
             var supported = localStorageSupported(null, force_check);
             if (!supported) {
                 console.error('localStorage unsupported; falling back to cookie store');
@@ -1107,11 +1132,11 @@
             return supported;
         },
 
-        error: function(msg) {
+        error: function (msg) {
             console.error('localStorage error: ' + msg);
         },
 
-        get: function(name) {
+        get: function (name) {
             try {
                 return window.localStorage.getItem(name);
             } catch (err) {
@@ -1120,7 +1145,7 @@
             return null;
         },
 
-        parse: function(name) {
+        parse: function (name) {
             try {
                 return _.JSONDecode(_.localStorage.get(name)) || {};
             } catch (err) {
@@ -1129,7 +1154,7 @@
             return null;
         },
 
-        set: function(name, value) {
+        set: function (name, value) {
             try {
                 window.localStorage.setItem(name, value);
             } catch (err) {
@@ -1137,7 +1162,7 @@
             }
         },
 
-        remove: function(name) {
+        remove: function (name) {
             try {
                 window.localStorage.removeItem(name);
             } catch (err) {
@@ -1146,7 +1171,7 @@
         }
     };
 
-    _.register_event = (function() {
+    _.register_event = (function () {
         // written by Dean Edwards, 2005
         // with input from Tino Zijdel - crisp@xs4all.nl
         // with input from Carl Sverre - mail@carlsverre.com
@@ -1161,7 +1186,7 @@
          * @param {boolean=} oldSchool
          * @param {boolean=} useCapture
          */
-        var register_event = function(element, type, handler, oldSchool, useCapture) {
+        var register_event = function (element, type, handler, oldSchool, useCapture) {
             if (!element) {
                 console.error('No valid element provided to register_event');
                 return;
@@ -1177,7 +1202,7 @@
         };
 
         function makeHandler(element, new_handler, old_handlers) {
-            var handler = function(event) {
+            var handler = function (event) {
                 event = event || fixEvent(window.event);
 
                 // this basically happens in firefox whenever another script
@@ -1214,10 +1239,10 @@
             }
             return event;
         }
-        fixEvent.preventDefault = function() {
+        fixEvent.preventDefault = function () {
             this.returnValue = false;
         };
-        fixEvent.stopPropagation = function() {
+        fixEvent.stopPropagation = function () {
             this.cancelBubble = true;
         };
 
@@ -1227,7 +1252,7 @@
 
     var TOKEN_MATCH_REGEX = new RegExp('^(\\w*)\\[(\\w+)([=~\\|\\^\\$\\*]?)=?"?([^\\]"]*)"?\\]$');
 
-    _.dom_query = (function() {
+    _.dom_query = (function () {
         /* document.getElementsBySelector(selector)
         - returns an array of element objects from the current document
         matching the CSS selector. Selectors can contain element names,
@@ -1350,38 +1375,38 @@
                     var checkFunction; // This function will be used to filter the elements
                     switch (attrOperator) {
                         case '=': // Equality
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return (e.getAttribute(attrName) == attrValue);
                             };
                             break;
                         case '~': // Match one of space seperated words
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return (e.getAttribute(attrName).match(new RegExp('\\b' + attrValue + '\\b')));
                             };
                             break;
                         case '|': // Match start with value followed by optional hyphen
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return (e.getAttribute(attrName).match(new RegExp('^' + attrValue + '-?')));
                             };
                             break;
                         case '^': // Match starts with value
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return (e.getAttribute(attrName).indexOf(attrValue) === 0);
                             };
                             break;
                         case '$': // Match ends with value - fails with "Warning" in Opera 7
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return (e.getAttribute(attrName).lastIndexOf(attrValue) == e.getAttribute(attrName).length - attrValue.length);
                             };
                             break;
                         case '*': // Match ends with value
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return (e.getAttribute(attrName).indexOf(attrValue) > -1);
                             };
                             break;
                         default:
                             // Just test for existence of attribute
-                            checkFunction = function(e) {
+                            checkFunction = function (e) {
                                 return e.getAttribute(attrName);
                             };
                     }
@@ -1410,7 +1435,7 @@
             return currentContext;
         }
 
-        return function(query) {
+        return function (query) {
             if (_.isElement(query)) {
                 return [query];
             } else if (_.isObject(query) && !_.isUndefined(query.length)) {
@@ -1425,10 +1450,10 @@
     var CLICK_IDS = ['dclid', 'fbclid', 'gclid', 'ko_click_id', 'li_fat_id', 'msclkid', 'ttclid', 'twclid', 'wbraid'];
 
     _.info = {
-        campaignParams: function(default_value) {
+        campaignParams: function (default_value) {
             var kw = '',
                 params = {};
-            _.each(CAMPAIGN_KEYWORDS, function(kwkey) {
+            _.each(CAMPAIGN_KEYWORDS, function (kwkey) {
                 kw = _.getQueryParam(document$1.URL, kwkey);
                 if (kw.length) {
                     params[kwkey] = kw;
@@ -1440,10 +1465,10 @@
             return params;
         },
 
-        clickParams: function() {
+        clickParams: function () {
             var id = '',
                 params = {};
-            _.each(CLICK_IDS, function(idkey) {
+            _.each(CLICK_IDS, function (idkey) {
                 id = _.getQueryParam(document$1.URL, idkey);
                 if (id.length) {
                     params[idkey] = id;
@@ -1453,11 +1478,11 @@
             return params;
         },
 
-        marketingParams: function() {
+        marketingParams: function () {
             return _.extend(_.info.campaignParams(), _.info.clickParams());
         },
 
-        searchEngine: function(referrer) {
+        searchEngine: function (referrer) {
             if (referrer.search('https?://(.*)google.([^/?]*)') === 0) {
                 return 'google';
             } else if (referrer.search('https?://(.*)bing.com') === 0) {
@@ -1471,7 +1496,7 @@
             }
         },
 
-        searchInfo: function(referrer) {
+        searchInfo: function (referrer) {
             var search = _.info.searchEngine(referrer),
                 param = (search != 'yahoo') ? 'q' : 'p',
                 ret = {};
@@ -1493,7 +1518,7 @@
          * The order of the checks are important since many user agents
          * include key words used in later checks.
          */
-        browser: function(user_agent, vendor, opera) {
+        browser: function (user_agent, vendor, opera) {
             vendor = vendor || ''; // vendor is undefined for at least IE9
             if (opera || _.includes(user_agent, ' OPR/')) {
                 if (_.includes(user_agent, 'Mini')) {
@@ -1544,14 +1569,14 @@
          * parsing major and minor version (e.g., 42.1). User agent strings from:
          * http://www.useragentstring.com/pages/useragentstring.php
          */
-        browserVersion: function(userAgent, vendor, opera) {
+        browserVersion: function (userAgent, vendor, opera) {
             var browser = _.info.browser(userAgent, vendor, opera);
             var versionRegexs = {
                 'Internet Explorer Mobile': /rv:(\d+(\.\d+)?)/,
                 'Microsoft Edge': /Edge?\/(\d+(\.\d+)?)/,
                 'Chrome': /Chrome\/(\d+(\.\d+)?)/,
                 'Chrome iOS': /CriOS\/(\d+(\.\d+)?)/,
-                'UC Browser' : /(UCBrowser|UCWEB)\/(\d+(\.\d+)?)/,
+                'UC Browser': /(UCBrowser|UCWEB)\/(\d+(\.\d+)?)/,
                 'Safari': /Version\/(\d+(\.\d+)?)/,
                 'Mobile Safari': /Version\/(\d+(\.\d+)?)/,
                 'Opera': /(Opera|OPR)\/(\d+(\.\d+)?)/,
@@ -1575,7 +1600,7 @@
             return parseFloat(matches[matches.length - 2]);
         },
 
-        os: function() {
+        os: function () {
             var a = userAgent;
             if (/Windows/i.test(a)) {
                 if (/Phone/.test(a) || /WPDesktop/.test(a)) {
@@ -1599,7 +1624,7 @@
             }
         },
 
-        device: function(user_agent) {
+        device: function (user_agent) {
             if (/Windows Phone/i.test(user_agent) || /WPDesktop/.test(user_agent)) {
                 return 'Windows Phone';
             } else if (/iPad/.test(user_agent)) {
@@ -1617,7 +1642,7 @@
             }
         },
 
-        referringDomain: function(referrer) {
+        referringDomain: function (referrer) {
             var split = referrer.split('/');
             if (split.length >= 3) {
                 return split[2];
@@ -1625,7 +1650,7 @@
             return '';
         },
 
-        properties: function() {
+        properties: function () {
             return _.extend(_.strip_empty_properties({
                 '$os': _.info.os(),
                 '$browser': _.info.browser(userAgent, navigator.vendor, windowOpera),
@@ -1644,7 +1669,7 @@
             });
         },
 
-        people_properties: function() {
+        people_properties: function () {
             return _.extend(_.strip_empty_properties({
                 '$os': _.info.os(),
                 '$browser': _.info.browser(userAgent, navigator.vendor, windowOpera)
@@ -1653,18 +1678,19 @@
             });
         },
 
-        mpPageViewProperties: function() {
+        mpPageViewProperties: function () {
             return _.strip_empty_properties({
                 'current_page_title': document$1.title,
                 'current_domain': window$1.location.hostname,
                 'current_url_path': window$1.location.pathname,
                 'current_url_protocol': window$1.location.protocol,
-                'current_url_search': window$1.location.search
+                'current_url_search': window$1.location.search,
+                'current_url_params': _.getAllQueryParams(window$1.location.search)
             });
         }
     };
 
-    var cheap_guid = function(maxlen) {
+    var cheap_guid = function (maxlen) {
         var guid = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
         return maxlen ? guid.substring(0, maxlen) : guid;
     };
@@ -1686,7 +1712,7 @@
      * extract_domain('my.sub.example.com')
      * // 'example.com'
      */
-    var extract_domain = function(hostname) {
+    var extract_domain = function (hostname) {
         var domain_regex = DOMAIN_MATCH_REGEX;
         var parts = hostname.split('.');
         var tld = parts[parts.length - 1];
@@ -1707,17 +1733,17 @@
     JSONParse = JSONParse || _.JSONDecode;
 
     // EXPORTS (for closure compiler)
-    _['toArray']                = _.toArray;
-    _['isObject']               = _.isObject;
-    _['JSONEncode']             = _.JSONEncode;
-    _['JSONDecode']             = _.JSONDecode;
-    _['isBlockedUA']            = _.isBlockedUA;
-    _['isEmptyObject']          = _.isEmptyObject;
-    _['info']                   = _.info;
-    _['info']['device']         = _.info.device;
-    _['info']['browser']        = _.info.browser;
+    _['toArray'] = _.toArray;
+    _['isObject'] = _.isObject;
+    _['JSONEncode'] = _.JSONEncode;
+    _['JSONDecode'] = _.JSONDecode;
+    _['isBlockedUA'] = _.isBlockedUA;
+    _['isEmptyObject'] = _.isEmptyObject;
+    _['info'] = _.info;
+    _['info']['device'] = _.info.device;
+    _['info']['browser'] = _.info.browser;
     _['info']['browserVersion'] = _.info.browserVersion;
-    _['info']['properties']     = _.info.properties;
+    _['info']['properties'] = _.info.properties;
 
     /**
      * DomTracker Object
@@ -3634,17 +3660,17 @@
     /*
      * Constants
      */
-    /** @const */ var SET_QUEUE_KEY          = '__mps';
-    /** @const */ var SET_ONCE_QUEUE_KEY     = '__mpso';
-    /** @const */ var UNSET_QUEUE_KEY        = '__mpus';
-    /** @const */ var ADD_QUEUE_KEY          = '__mpa';
-    /** @const */ var APPEND_QUEUE_KEY       = '__mpap';
-    /** @const */ var REMOVE_QUEUE_KEY       = '__mpr';
-    /** @const */ var UNION_QUEUE_KEY        = '__mpu';
+    /** @const */ var SET_QUEUE_KEY = '__mps';
+    /** @const */ var SET_ONCE_QUEUE_KEY = '__mpso';
+    /** @const */ var UNSET_QUEUE_KEY = '__mpus';
+    /** @const */ var ADD_QUEUE_KEY = '__mpa';
+    /** @const */ var APPEND_QUEUE_KEY = '__mpap';
+    /** @const */ var REMOVE_QUEUE_KEY = '__mpr';
+    /** @const */ var UNION_QUEUE_KEY = '__mpu';
     // This key is deprecated, but we want to check for it to see whether aliasing is allowed.
     /** @const */ var PEOPLE_DISTINCT_ID_KEY = '$people_distinct_id';
-    /** @const */ var ALIAS_ID_KEY           = '__alias';
-    /** @const */ var EVENT_TIMERS_KEY       = '__timers';
+    /** @const */ var ALIAS_ID_KEY = '__alias';
+    /** @const */ var EVENT_TIMERS_KEY = '__timers';
     /** @const */ var RESERVED_PROPERTIES = [
         SET_QUEUE_KEY,
         SET_ONCE_QUEUE_KEY,
@@ -3662,7 +3688,7 @@
      * Mixpanel Persistence Object
      * @constructor
      */
-    var MixpanelPersistence = function(config) {
+    var MixpanelPersistence = function (config) {
         this['props'] = {};
         this.campaign_params_saved = false;
 
@@ -3690,13 +3716,13 @@
         this.save();
     };
 
-    MixpanelPersistence.prototype.properties = function() {
+    MixpanelPersistence.prototype.properties = function () {
         var p = {};
 
         this.load();
 
         // Filter out reserved properties
-        _.each(this['props'], function(v, k) {
+        _.each(this['props'], function (v, k) {
             if (!_.include(RESERVED_PROPERTIES, k)) {
                 p[k] = v;
             }
@@ -3704,7 +3730,7 @@
         return p;
     };
 
-    MixpanelPersistence.prototype.load = function() {
+    MixpanelPersistence.prototype.load = function () {
         if (this.disabled) { return; }
 
         var entry = this.storage.parse(this.name);
@@ -3714,7 +3740,7 @@
         }
     };
 
-    MixpanelPersistence.prototype.upgrade = function(config) {
+    MixpanelPersistence.prototype.upgrade = function (config) {
         var upgrade_from_old_lib = config['upgrade'],
             old_cookie_name,
             old_cookie;
@@ -3722,7 +3748,7 @@
         if (upgrade_from_old_lib) {
             old_cookie_name = 'mp_super_properties';
             // Case where they had a custom cookie name before.
-            if (typeof(upgrade_from_old_lib) === 'string') {
+            if (typeof (upgrade_from_old_lib) === 'string') {
                 old_cookie_name = upgrade_from_old_lib;
             }
 
@@ -3769,7 +3795,7 @@
         }
     };
 
-    MixpanelPersistence.prototype.save = function() {
+    MixpanelPersistence.prototype.save = function () {
         if (this.disabled) { return; }
 
         this.storage.set(
@@ -3783,12 +3809,12 @@
         );
     };
 
-    MixpanelPersistence.prototype.load_prop = function(key) {
+    MixpanelPersistence.prototype.load_prop = function (key) {
         this.load();
         return this['props'][key];
     };
 
-    MixpanelPersistence.prototype.remove = function() {
+    MixpanelPersistence.prototype.remove = function () {
         // remove both domain and subdomain cookies
         this.storage.remove(this.name, false, this.cookie_domain);
         this.storage.remove(this.name, true, this.cookie_domain);
@@ -3796,7 +3822,7 @@
 
     // removes the storage entry and deletes all loaded data
     // forced name for tests
-    MixpanelPersistence.prototype.clear = function() {
+    MixpanelPersistence.prototype.clear = function () {
         this.remove();
         this['props'] = {};
     };
@@ -3806,14 +3832,14 @@
     * @param {*=} default_value
     * @param {number=} days
     */
-    MixpanelPersistence.prototype.register_once = function(props, default_value, days) {
+    MixpanelPersistence.prototype.register_once = function (props, default_value, days) {
         if (_.isObject(props)) {
-            if (typeof(default_value) === 'undefined') { default_value = 'None'; }
-            this.expire_days = (typeof(days) === 'undefined') ? this.default_expiry : days;
+            if (typeof (default_value) === 'undefined') { default_value = 'None'; }
+            this.expire_days = (typeof (days) === 'undefined') ? this.default_expiry : days;
 
             this.load();
 
-            _.each(props, function(val, prop) {
+            _.each(props, function (val, prop) {
                 if (!this['props'].hasOwnProperty(prop) || this['props'][prop] === default_value) {
                     this['props'][prop] = val;
                 }
@@ -3830,9 +3856,9 @@
     * @param {Object} props
     * @param {number=} days
     */
-    MixpanelPersistence.prototype.register = function(props, days) {
+    MixpanelPersistence.prototype.register = function (props, days) {
         if (_.isObject(props)) {
-            this.expire_days = (typeof(days) === 'undefined') ? this.default_expiry : days;
+            this.expire_days = (typeof (days) === 'undefined') ? this.default_expiry : days;
 
             this.load();
             _.extend(this['props'], props);
@@ -3843,7 +3869,7 @@
         return false;
     };
 
-    MixpanelPersistence.prototype.unregister = function(prop) {
+    MixpanelPersistence.prototype.unregister = function (prop) {
         this.load();
         if (prop in this['props']) {
             delete this['props'][prop];
@@ -3851,27 +3877,35 @@
         }
     };
 
-    MixpanelPersistence.prototype.update_search_keyword = function(referrer) {
+    MixpanelPersistence.prototype.update_search_keyword = function (referrer) {
         this.register(_.info.searchInfo(referrer));
     };
 
     // EXPORTED METHOD, we test this directly.
-    MixpanelPersistence.prototype.update_referrer_info = function(referrer) {
+    MixpanelPersistence.prototype.update_referrer_info = function (referrer) {
         // If referrer doesn't exist, we want to note the fact that it was type-in traffic.
+        var routerReferrer = null;
+        try {
+            routerReferrer = _.cookie.get('_tt_heimdall_referrer');
+            _.cookie.remove('_tt_heimdall_referrer');
+        } catch (err) {
+            console.error('Error in getting router referrer, hence skipping');
+        }
+        var finalReferrer = routerReferrer || referrer;
         this.register_once({
-            '$initial_referrer': referrer || '$direct',
-            '$initial_referring_domain': _.info.referringDomain(referrer) || '$direct'
+            '$initial_referrer': finalReferrer || '$direct',
+            '$initial_referring_domain': _.info.referringDomain(finalReferrer) || '$direct'
         }, '');
     };
 
-    MixpanelPersistence.prototype.get_referrer_info = function() {
+    MixpanelPersistence.prototype.get_referrer_info = function () {
         return _.strip_empty_properties({
             '$initial_referrer': this['props']['$initial_referrer'],
             '$initial_referring_domain': this['props']['$initial_referring_domain']
         });
     };
 
-    MixpanelPersistence.prototype.update_config = function(config) {
+    MixpanelPersistence.prototype.update_config = function (config) {
         this.default_expiry = this.expire_days = config['cookie_expiration'];
         this.set_disabled(config['disable_persistence']);
         this.set_cookie_domain(config['cookie_domain']);
@@ -3880,7 +3914,7 @@
         this.set_secure(config['secure_cookie']);
     };
 
-    MixpanelPersistence.prototype.set_disabled = function(disabled) {
+    MixpanelPersistence.prototype.set_disabled = function (disabled) {
         this.disabled = disabled;
         if (this.disabled) {
             this.remove();
@@ -3889,7 +3923,7 @@
         }
     };
 
-    MixpanelPersistence.prototype.set_cookie_domain = function(cookie_domain) {
+    MixpanelPersistence.prototype.set_cookie_domain = function (cookie_domain) {
         if (cookie_domain !== this.cookie_domain) {
             this.remove();
             this.cookie_domain = cookie_domain;
@@ -3897,7 +3931,7 @@
         }
     };
 
-    MixpanelPersistence.prototype.set_cross_site = function(cross_site) {
+    MixpanelPersistence.prototype.set_cross_site = function (cross_site) {
         if (cross_site !== this.cross_site) {
             this.cross_site = cross_site;
             this.remove();
@@ -3905,7 +3939,7 @@
         }
     };
 
-    MixpanelPersistence.prototype.set_cross_subdomain = function(cross_subdomain) {
+    MixpanelPersistence.prototype.set_cross_subdomain = function (cross_subdomain) {
         if (cross_subdomain !== this.cross_subdomain) {
             this.cross_subdomain = cross_subdomain;
             this.remove();
@@ -3913,11 +3947,11 @@
         }
     };
 
-    MixpanelPersistence.prototype.get_cross_subdomain = function() {
+    MixpanelPersistence.prototype.get_cross_subdomain = function () {
         return this.cross_subdomain;
     };
 
-    MixpanelPersistence.prototype.set_secure = function(secure) {
+    MixpanelPersistence.prototype.set_secure = function (secure) {
         if (secure !== this.secure) {
             this.secure = secure ? true : false;
             this.remove();
@@ -3925,7 +3959,7 @@
         }
     };
 
-    MixpanelPersistence.prototype._add_to_people_queue = function(queue, data) {
+    MixpanelPersistence.prototype._add_to_people_queue = function (queue, data) {
         var q_key = this._get_queue_key(queue),
             q_data = data[queue],
             set_q = this._get_or_create_queue(SET_ACTION),
@@ -3948,22 +3982,22 @@
             this._pop_from_people_queue(UNSET_ACTION, q_data);
         } else if (q_key === SET_ONCE_QUEUE_KEY) {
             // only queue the data if there is not already a set_once call for it.
-            _.each(q_data, function(v, k) {
+            _.each(q_data, function (v, k) {
                 if (!(k in set_once_q)) {
                     set_once_q[k] = v;
                 }
             });
             this._pop_from_people_queue(UNSET_ACTION, q_data);
         } else if (q_key === UNSET_QUEUE_KEY) {
-            _.each(q_data, function(prop) {
+            _.each(q_data, function (prop) {
 
                 // undo previously-queued actions on this key
-                _.each([set_q, set_once_q, add_q, union_q], function(enqueued_obj) {
+                _.each([set_q, set_once_q, add_q, union_q], function (enqueued_obj) {
                     if (prop in enqueued_obj) {
                         delete enqueued_obj[prop];
                     }
                 });
-                _.each(append_q, function(append_obj) {
+                _.each(append_q, function (append_obj) {
                     if (prop in append_obj) {
                         delete append_obj[prop];
                     }
@@ -3973,7 +4007,7 @@
 
             });
         } else if (q_key === ADD_QUEUE_KEY) {
-            _.each(q_data, function(v, k) {
+            _.each(q_data, function (v, k) {
                 // If it exists in the set queue, increment
                 // the value
                 if (k in set_q) {
@@ -3989,7 +4023,7 @@
             }, this);
             this._pop_from_people_queue(UNSET_ACTION, q_data);
         } else if (q_key === UNION_QUEUE_KEY) {
-            _.each(q_data, function(v, k) {
+            _.each(q_data, function (v, k) {
                 if (_.isArray(v)) {
                     if (!(k in union_q)) {
                         union_q[k] = [];
@@ -4013,15 +4047,15 @@
         this.save();
     };
 
-    MixpanelPersistence.prototype._pop_from_people_queue = function(queue, data) {
+    MixpanelPersistence.prototype._pop_from_people_queue = function (queue, data) {
         var q = this['props'][this._get_queue_key(queue)];
         if (!_.isUndefined(q)) {
-            _.each(data, function(v, k) {
+            _.each(data, function (v, k) {
                 if (queue === APPEND_ACTION || queue === REMOVE_ACTION) {
                     // list actions: only remove if both k+v match
                     // e.g. remove should not override append in a case like
                     // append({foo: 'bar'}); remove({foo: 'qux'})
-                    _.each(q, function(queued_action) {
+                    _.each(q, function (queued_action) {
                         if (queued_action[k] === v) {
                             delete queued_action[k];
                         }
@@ -4033,11 +4067,11 @@
         }
     };
 
-    MixpanelPersistence.prototype.load_queue = function(queue) {
+    MixpanelPersistence.prototype.load_queue = function (queue) {
         return this.load_prop(this._get_queue_key(queue));
     };
 
-    MixpanelPersistence.prototype._get_queue_key = function(queue) {
+    MixpanelPersistence.prototype._get_queue_key = function (queue) {
         if (queue === SET_ACTION) {
             return SET_QUEUE_KEY;
         } else if (queue === SET_ONCE_ACTION) {
@@ -4057,20 +4091,20 @@
         }
     };
 
-    MixpanelPersistence.prototype._get_or_create_queue = function(queue, default_val) {
+    MixpanelPersistence.prototype._get_or_create_queue = function (queue, default_val) {
         var key = this._get_queue_key(queue);
         default_val = _.isUndefined(default_val) ? {} : default_val;
         return this['props'][key] || (this['props'][key] = default_val);
     };
 
-    MixpanelPersistence.prototype.set_event_timer = function(event_name, timestamp) {
+    MixpanelPersistence.prototype.set_event_timer = function (event_name, timestamp) {
         var timers = this.load_prop(EVENT_TIMERS_KEY) || {};
         timers[event_name] = timestamp;
         this['props'][EVENT_TIMERS_KEY] = timers;
         this.save();
     };
 
-    MixpanelPersistence.prototype.remove_event_timer = function(event_name) {
+    MixpanelPersistence.prototype.remove_event_timer = function (event_name) {
         var timers = this.load_prop(EVENT_TIMERS_KEY) || {};
         var timestamp = timers[event_name];
         if (!_.isUndefined(timestamp)) {

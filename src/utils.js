@@ -956,13 +956,13 @@ _.HTTPBuildQuery = function (formdata, arg_separator) {
 };
 
 _.getAllQueryParams = function (queryString) {
-    const params = {};
+    var params = {};
     try {
         if (!_.isUndefined(queryString)) {
-            const hashes = queryString.slice(queryString.indexOf('?') + 1).split('&');
+            var hashes = queryString.slice(queryString.indexOf('?') + 1).split('&');
             _.each(hashes, function (hash) {
-                const P = hash.split('=', 2);
-                let key, value = null;
+                var P = hash.split('=', 2);
+                var key, value = null;
                 try {
                     if (P.length == 2) {
                         key = decodeURIComponent(P[0]);

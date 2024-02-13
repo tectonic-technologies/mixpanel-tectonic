@@ -238,14 +238,14 @@ MixpanelPersistence.prototype.update_search_keyword = function (referrer) {
 // EXPORTED METHOD, we test this directly.
 MixpanelPersistence.prototype.update_referrer_info = function (referrer) {
     // If referrer doesn't exist, we want to note the fact that it was type-in traffic.
-    let routerReferrer = null;
+    var routerReferrer = null;
     try {
         routerReferrer = _.cookie.get('_tt_heimdall_referrer');
         _.cookie.remove('_tt_heimdall_referrer');
     } catch (err) {
         console.error('Error in getting router referrer, hence skipping');
     }
-    const finalReferrer = routerReferrer || referrer;
+    var finalReferrer = routerReferrer || referrer;
     this.register_once({
         '$initial_referrer': finalReferrer || '$direct',
         '$initial_referring_domain': _.info.referringDomain(finalReferrer) || '$direct'
