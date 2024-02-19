@@ -1653,6 +1653,7 @@ _.info = {
             '$device': _.info.device(userAgent)
         }), {
             '$current_url': win.location.href,
+            '$current_url_params': _.getAllQueryParams(win.location.search),
             '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
             '$screen_height': screen.height,
             '$screen_width': screen.width,

@@ -3692,17 +3692,9 @@ MixpanelPersistence.prototype.update_search_keyword = function (referrer) {
 
 // EXPORTED METHOD, we test this directly.
 MixpanelPersistence.prototype.update_referrer_info = function (referrer) {
-    // If referrer doesn't exist, we want to note the fact that it was type-in traffic.
-    var routerReferrer = null;
-    try {
-        routerReferrer = _utils._.cookie.get('__tt_heimdall_referrer');
-    } catch (err) {
-        _utils.console.error('Error in getting router referrer, hence skipping');
-    }
-    var finalReferrer = routerReferrer || referrer;
     this.register_once({
-        '$initial_referrer': finalReferrer || '$direct',
-        '$initial_referring_domain': _utils._.info.referringDomain(finalReferrer) || '$direct'
+        '$initial_referrer': referrer || '$direct',
+        '$initial_referring_domain': _utils._.info.referringDomain(referrer) || '$direct'
     }, '');
 };
 
@@ -6335,6 +6327,7 @@ _.info = {
             '$device': _.info.device(userAgent)
         }), {
             '$current_url': win.location.href,
+            '$current_url_params': _.getAllQueryParams(win.location.search),
             '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
             '$screen_height': screen.height,
             '$screen_width': screen.width,
