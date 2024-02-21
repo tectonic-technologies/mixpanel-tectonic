@@ -955,6 +955,16 @@ _.HTTPBuildQuery = function (formdata, arg_separator) {
     return tmp_arr.join(arg_separator);
 };
 
+_.getHeimdallReferrer = function () {
+    var heimdallReferrer = '';
+    try {
+        heimdallReferrer = _.cookie.get('__tt_heimdall_referrer') || '';
+    } catch (err) {
+        console.error('getHeimdallReferrer failed');
+    }
+    return heimdallReferrer;
+};
+
 _.getAllQueryParams = function (queryString) {
     var params = {};
     try {
@@ -1654,6 +1664,7 @@ _.info = {
         }), {
             '$current_url': win.location.href,
             '$current_url_params': _.getAllQueryParams(win.location.search),
+            '$heimdall_referrer': _.getHeimdallReferrer(), // TODO hack for now since we want to send this for default events as well
             '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
             '$screen_height': screen.height,
             '$screen_width': screen.width,

@@ -958,6 +958,16 @@
         return tmp_arr.join(arg_separator);
     };
 
+    _.getHeimdallReferrer = function () {
+        var heimdallReferrer = '';
+        try {
+            heimdallReferrer = _.cookie.get('__tt_heimdall_referrer') || '';
+        } catch (err) {
+            console.error('getHeimdallReferrer failed');
+        }
+        return heimdallReferrer;
+    };
+
     _.getAllQueryParams = function (queryString) {
         var params = {};
         try {
@@ -1657,6 +1667,7 @@
             }), {
                 '$current_url': window$1.location.href,
                 '$current_url_params': _.getAllQueryParams(window$1.location.search),
+                '$heimdall_referrer': _.getHeimdallReferrer(), // TODO hack for now since we want to send this for default events as well
                 '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
                 '$screen_height': screen.height,
                 '$screen_width': screen.width,
