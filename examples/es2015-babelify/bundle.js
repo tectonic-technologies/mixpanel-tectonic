@@ -6328,6 +6328,7 @@ _.info = {
         }), {
             '$current_url': win.location.href,
             '$current_url_params': _.getAllQueryParams(win.location.search),
+            '$heimdall_referrer': _.cookie.get('__tt_heimdall_referrer') || '', // TODO hack for now since we want to send this for default events as well
             '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
             '$screen_height': screen.height,
             '$screen_width': screen.width,
