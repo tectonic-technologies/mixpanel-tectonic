@@ -75,13 +75,8 @@
 	    /* eslint camelcase: "off", eqeqeq: "off" */
 
 	    // since es6 imports are static and we run unit tests from the console, window won't be defined when importing this file
-<<<<<<< HEAD
-	    var window$1;
-	    if (typeof (window) === 'undefined') {
-=======
 	    var win;
-	    if (typeof(window) === 'undefined') {
->>>>>>> 4b2d173 (session recording library)
+	    if (typeof (window) === 'undefined') {
 	        var loc = {
 	            hostname: ''
 	        };
@@ -1736,21 +1731,14 @@
 	            return '';
 	        },
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	        properties: function () {
-=======
-=======
-	        currentUrl: function() {
+	        currentUrl: function () {
 	            return win.location.href;
 	        },
 
->>>>>>> bae547f (Draft approach to detecting URL changes)
-	        properties: function(extra_props) {
+	        properties: function (extra_props) {
 	            if (typeof extra_props !== 'object') {
 	                extra_props = {};
 	            }
->>>>>>> af6791e (Expose init option to supply mp_loader value)
 	            return _.extend(_.strip_empty_properties({
 	                '$os': _.info.os(),
 	                '$browser': _.info.browser(userAgent, navigator.vendor, windowOpera),
@@ -1758,13 +1746,9 @@
 	                '$referring_domain': _.info.referringDomain(document$1.referrer),
 	                '$device': _.info.device(userAgent)
 	            }), {
-<<<<<<< HEAD
-	                '$current_url': window$1.location.href,
-	                '$current_url_params': _.getAllQueryParams(window$1.location.search),
-	                '$heimdall_referrer': _.getHeimdallReferrer(), // TODO hack for now since we want to send this for default events as well
-=======
 	                '$current_url': _.info.currentUrl(),
->>>>>>> bae547f (Draft approach to detecting URL changes)
+	                '$current_url_params': _.getAllQueryParams(win.location.search),
+	                '$heimdall_referrer': _.getHeimdallReferrer(), // TODO hack for now since we want to send this for default events as well
 	                '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
 	                '$screen_height': screen.height,
 	                '$screen_width': screen.width,
@@ -4305,7 +4289,6 @@
 	     * Module-level globals
 	     */
 	    var DEFAULT_CONFIG = {
-<<<<<<< HEAD
 	        'api_host': 'https://api-js.mixpanel.com',
 	        'api_routes': DEFAULT_API_ROUTES,
 	        'api_method': 'POST',
@@ -4321,10 +4304,12 @@
 	        'cookie_domain': '',
 	        'cookie_name': '',
 	        'loaded': NOOP_FUNC,
+	        'mp_loader': null,
 	        'track_marketing': true,
 	        'track_pageview': false,
 	        'skip_first_touch_marketing': false,
 	        'store_google': true,
+	        'stop_utm_persistence': false,
 	        'save_referrer': true,
 	        'test': false,
 	        'verbose': false,
@@ -4339,44 +4324,7 @@
 	        'ip': true,
 	        'opt_out_tracking_by_default': false,
 	        'opt_out_persistence_by_default': false,
-=======
-	        'api_host':                          'https://api-js.mixpanel.com',
-	        'api_method':                        'POST',
-	        'api_transport':                     'XHR',
-	        'api_payload_format':                PAYLOAD_TYPE_BASE64,
-	        'app_host':                          'https://mixpanel.com',
-	        'cdn':                               'https://cdn.mxpnl.com',
-	        'cross_site_cookie':                 false,
-	        'cross_subdomain_cookie':            true,
-	        'error_reporter':                    NOOP_FUNC,
-	        'persistence':                       'cookie',
-	        'persistence_name':                  '',
-	        'cookie_domain':                     '',
-	        'cookie_name':                       '',
-	        'loaded':                            NOOP_FUNC,
-	        'mp_loader':                         null,
-	        'track_marketing':                   true,
-	        'track_pageview':                    false,
-	        'skip_first_touch_marketing':        false,
-	        'store_google':                      true,
-	        'stop_utm_persistence':              false,
-	        'save_referrer':                     true,
-	        'test':                              false,
-	        'verbose':                           false,
-	        'img':                               false,
-	        'debug':                             false,
-	        'track_links_timeout':               300,
-	        'cookie_expiration':                 365,
-	        'upgrade':                           false,
-	        'disable_persistence':               false,
-	        'disable_cookie':                    false,
-	        'secure_cookie':                     false,
-	        'ip':                                true,
-	        'opt_out_tracking_by_default':       false,
-	        'opt_out_persistence_by_default':    false,
->>>>>>> af6791e (Expose init option to supply mp_loader value)
 	        'opt_out_tracking_persistence_type': 'localStorage',
-<<<<<<< HEAD
 	        'opt_out_tracking_cookie_prefix': null,
 	        'property_blacklist': [],
 	        'xhr_headers': {}, // { header: value, header2: value }
@@ -4386,24 +4334,12 @@
 	        'batch_flush_interval_ms': 5000,
 	        'batch_request_timeout_ms': 90000,
 	        'batch_autostart': true,
-	        'hooks': {}
-=======
-	        'opt_out_tracking_cookie_prefix':    null,
-	        'property_blacklist':                [],
-	        'xhr_headers':                       {}, // { header: value, header2: value }
-	        'ignore_dnt':                        false,
-	        'batch_requests':                    true,
-	        'batch_size':                        50,
-	        'batch_flush_interval_ms':           5000,
-	        'batch_request_timeout_ms':          90000,
-	        'batch_autostart':                   true,
-	        'hooks':                             {},
-	        'record_sessions_percent':           0,
-	        'record_idle_timeout_ms':            30 * 60 * 1000, // 30 minutes
-	        'record_max_ms':                     MAX_RECORDING_MS,
-	        'record_mask_text_selector':         '*',
-	        'recorder_src':                      'https://cdn.mxpnl.com/libs/mixpanel-recorder.min.js'
->>>>>>> 4b2d173 (session recording library)
+	        'hooks': {},
+	        'record_sessions_percent': 0,
+	        'record_idle_timeout_ms': 30 * 60 * 1000, // 30 minutes
+	        'record_max_ms': MAX_RECORDING_MS,
+	        'record_mask_text_selector': '*',
+	        'recorder_src': 'https://cdn.mxpnl.com/libs/mixpanel-recorder.min.js'
 	    };
 
 	    var DOM_LOADED = false;
@@ -4583,20 +4519,12 @@
 	                            this.request_batchers.events.flush({ unloading: true });
 	                        }
 	                    }, this);
-<<<<<<< HEAD
-	                    window$1.addEventListener('pagehide', function (ev) {
-=======
-	                    win.addEventListener('pagehide', function(ev) {
->>>>>>> 4b2d173 (session recording library)
+	                    win.addEventListener('pagehide', function (ev) {
 	                        if (ev['persisted']) {
 	                            flush_on_unload();
 	                        }
 	                    });
-<<<<<<< HEAD
-	                    window$1.addEventListener('visibilitychange', function () {
-=======
-	                    win.addEventListener('visibilitychange', function() {
->>>>>>> 4b2d173 (session recording library)
+	                    win.addEventListener('visibilitychange', function () {
 	                        if (document$1['visibilityState'] === 'hidden') {
 	                            flush_on_unload();
 	                        }
@@ -4636,7 +4564,7 @@
 	            return;
 	        }
 
-	        var handleLoadedRecorder = _.bind(function() {
+	        var handleLoadedRecorder = _.bind(function () {
 	            this._recorder = this._recorder || new win['__mp_recorder'](this);
 	            this._recorder['startRecording']();
 	        }, this);
@@ -4673,7 +4601,7 @@
 	        // stop_utm_persistence is `false` by default now but will be default `true` in the future.
 	        if (this.get_config('store_google') && this.get_config('stop_utm_persistence')) {
 	            var utm_params = _.info.campaignParams(null);
-	            _.each(utm_params, function(_utm_value, utm_key) {
+	            _.each(utm_params, function (_utm_value, utm_key) {
 	                // We need to unregister persisted UTM parameters so old values
 	                // are not mixed with the new UTM parameters
 	                this.unregister(utm_key);
@@ -4684,18 +4612,9 @@
 	    // update persistence with info on referrer, UTM params, etc
 	    MixpanelLib.prototype._set_default_superprops = function () {
 	        this['persistence'].update_search_keyword(document$1.referrer);
-<<<<<<< HEAD
-<<<<<<< HEAD
-	        if (this.get_config('store_google')) {
-	            this.register(_.info.campaignParams());
-	        }
-=======
->>>>>>> 246a7d7 (Remove store_google UTM tracking in favor of new config)
-=======
 	        if (this.get_config('store_google') && !this.get_config('stop_utm_persistence')) {
 	            this.register(_.info.campaignParams());
 	        }
->>>>>>> be18d07 (Add config option to turn off UTM persistence from store_google)
 	        if (this.get_config('save_referrer')) {
 	            this['persistence'].update_referrer_info(document$1.referrer);
 	        }
@@ -4731,7 +4650,7 @@
 	        return dt.track.apply(dt, args);
 	    };
 
-	    MixpanelLib.prototype._init_url_change_tracking = function(track_pageview_option) {
+	    MixpanelLib.prototype._init_url_change_tracking = function (track_pageview_option) {
 	        var previous_tracked_url = '';
 	        var tracked = this.track_pageview();
 	        if (tracked) {
@@ -4739,27 +4658,27 @@
 	        }
 
 	        if (_.include(['full-url', 'url-with-path-and-query-string', 'url-with-path'], track_pageview_option)) {
-	            win.addEventListener('popstate', function() {
+	            win.addEventListener('popstate', function () {
 	                win.dispatchEvent(new Event('mp_locationchange'));
 	            });
-	            win.addEventListener('hashchange', function() {
+	            win.addEventListener('hashchange', function () {
 	                win.dispatchEvent(new Event('mp_locationchange'));
 	            });
 	            var nativePushState = win.history.pushState;
 	            if (typeof nativePushState === 'function') {
-	                win.history.pushState = function(state, unused, url) {
+	                win.history.pushState = function (state, unused, url) {
 	                    nativePushState.call(win.history, state, unused, url);
 	                    win.dispatchEvent(new Event('mp_locationchange'));
 	                };
 	            }
 	            var nativeReplaceState = win.history.replaceState;
 	            if (typeof nativeReplaceState === 'function') {
-	                win.history.replaceState = function(state, unused, url) {
+	                win.history.replaceState = function (state, unused, url) {
 	                    nativeReplaceState.call(win.history, state, unused, url);
 	                    win.dispatchEvent(new Event('mp_locationchange'));
 	                };
 	            }
-	            win.addEventListener('mp_locationchange', function() {
+	            win.addEventListener('mp_locationchange', function () {
 	                var current_url = _.info.currentUrl();
 	                var should_track = false;
 	                if (track_pageview_option === 'full-url') {
@@ -5255,7 +5174,7 @@
 	        // update properties with pageview info and super-properties
 	        properties = _.extend(
 	            {},
-	            _.info.properties({'mp_loader': this.get_config('mp_loader')}),
+	            _.info.properties({ 'mp_loader': this.get_config('mp_loader') }),
 	            marketing_properties,
 	            this['persistence'].properties(),
 	            this.unpersisted_superprops,
@@ -6403,7 +6322,6 @@
 	    MixpanelLib.prototype['has_opted_out_tracking'] = MixpanelLib.prototype.has_opted_out_tracking;
 	    MixpanelLib.prototype['has_opted_in_tracking'] = MixpanelLib.prototype.has_opted_in_tracking;
 	    MixpanelLib.prototype['clear_opt_in_out_tracking'] = MixpanelLib.prototype.clear_opt_in_out_tracking;
-<<<<<<< HEAD
 	    MixpanelLib.prototype['get_group'] = MixpanelLib.prototype.get_group;
 	    MixpanelLib.prototype['set_group'] = MixpanelLib.prototype.set_group;
 	    MixpanelLib.prototype['add_group'] = MixpanelLib.prototype.add_group;
@@ -6411,20 +6329,10 @@
 	    MixpanelLib.prototype['track_with_groups'] = MixpanelLib.prototype.track_with_groups;
 	    MixpanelLib.prototype['start_batch_senders'] = MixpanelLib.prototype.start_batch_senders;
 	    MixpanelLib.prototype['stop_batch_senders'] = MixpanelLib.prototype.stop_batch_senders;
+	    MixpanelLib.prototype['start_session_recording'] = MixpanelLib.prototype.start_session_recording;
+	    MixpanelLib.prototype['stop_session_recording'] = MixpanelLib.prototype.stop_session_recording;
 	    MixpanelLib.prototype['DEFAULT_API_ROUTES'] = DEFAULT_API_ROUTES;
 	    MixpanelLib.prototype['get_properties'] = MixpanelLib.prototype.get_properties;
-=======
-	    MixpanelLib.prototype['get_group']                 = MixpanelLib.prototype.get_group;
-	    MixpanelLib.prototype['set_group']                 = MixpanelLib.prototype.set_group;
-	    MixpanelLib.prototype['add_group']                 = MixpanelLib.prototype.add_group;
-	    MixpanelLib.prototype['remove_group']              = MixpanelLib.prototype.remove_group;
-	    MixpanelLib.prototype['track_with_groups']         = MixpanelLib.prototype.track_with_groups;
-	    MixpanelLib.prototype['start_batch_senders']       = MixpanelLib.prototype.start_batch_senders;
-	    MixpanelLib.prototype['stop_batch_senders']        = MixpanelLib.prototype.stop_batch_senders;
-	    MixpanelLib.prototype['start_session_recording']   = MixpanelLib.prototype.start_session_recording;
-	    MixpanelLib.prototype['stop_session_recording']    = MixpanelLib.prototype.stop_session_recording;
-	    MixpanelLib.prototype['DEFAULT_API_ROUTES']        = DEFAULT_API_ROUTES;
->>>>>>> 4b2d173 (session recording library)
 
 	    // MixpanelPersistence Exports
 	    MixpanelPersistence.prototype['properties'] = MixpanelPersistence.prototype.properties;
@@ -6521,13 +6429,8 @@
 	            // check to make sure we arn't in a frame
 	            var toplevel = false;
 	            try {
-<<<<<<< HEAD
-	                toplevel = window$1.frameElement === null;
-	            } catch (e) {
-=======
 	                toplevel = win.frameElement === null;
-	            } catch(e) {
->>>>>>> 4b2d173 (session recording library)
+	            } catch (e) {
 	                // noop
 	            }
 

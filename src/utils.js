@@ -1662,10 +1662,6 @@ _.info = {
         return win.location.href;
     },
 
-    currentUrl: function () {
-        return win.location.href;
-    },
-
     properties: function (extra_props) {
         if (typeof extra_props !== 'object') {
             extra_props = {};

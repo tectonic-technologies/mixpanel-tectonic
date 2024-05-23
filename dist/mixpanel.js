@@ -3,18 +3,6 @@
 
     var Config = {
         DEBUG: false,
-<<<<<<< HEAD
-        LIB_VERSION: '2.48.1'
-    };
-
-    // since es6 imports are static and we run unit tests from the console, window won't be defined when importing this file
-    var window$1;
-    if (typeof (window) === 'undefined') {
-        var loc = {
-            hostname: ''
-        };
-        window$1 = {
-=======
         LIB_VERSION: '2.50.0'
     };
 
@@ -22,12 +10,11 @@
 
     // since es6 imports are static and we run unit tests from the console, window won't be defined when importing this file
     var win;
-    if (typeof(window) === 'undefined') {
+    if (typeof (window) === 'undefined') {
         var loc = {
             hostname: ''
         };
         win = {
->>>>>>> 7bd87d6 (Version bumped to latest)
             navigator: { userAgent: '' },
             document: {
                 location: loc,
@@ -37,45 +24,17 @@
             location: loc
         };
     } else {
-<<<<<<< HEAD
-        window$1 = window;
-    }
-
-=======
         win = window;
     }
 
     // Maximum allowed session recording length
     var MAX_RECORDING_MS = 24 * 60 * 60 * 1000; // 24 hours
 
->>>>>>> 7bd87d6 (Version bumped to latest)
     /*
      * Saved references to long variable names, so that closure compiler can
      * minimize file size.
      */
 
-<<<<<<< HEAD
-    var ArrayProto = Array.prototype;
-    var FuncProto = Function.prototype;
-    var ObjProto = Object.prototype;
-    var slice = ArrayProto.slice;
-    var toString = ObjProto.toString;
-    var hasOwnProperty = ObjProto.hasOwnProperty;
-    var windowConsole = window$1.console;
-    var navigator = window$1.navigator;
-    var document$1 = window$1.document;
-    var windowOpera = window$1.opera;
-    var screen = window$1.screen;
-    var userAgent = navigator.userAgent;
-    var nativeBind = FuncProto.bind;
-    var nativeForEach = ArrayProto.forEach;
-    var nativeIndexOf = ArrayProto.indexOf;
-    var nativeMap = ArrayProto.map;
-    var nativeIsArray = Array.isArray;
-    var breaker = {};
-    var _ = {
-        trim: function (str) {
-=======
     var ArrayProto = Array.prototype,
         FuncProto = Function.prototype,
         ObjProto = Object.prototype,
@@ -97,8 +56,7 @@
         breaker = {};
 
     var _ = {
-        trim: function(str) {
->>>>>>> 7bd87d6 (Version bumped to latest)
+        trim: function (str) {
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill
             return str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
         }
@@ -107,83 +65,51 @@
     // Console override
     var console = {
         /** @type {function(...*)} */
-<<<<<<< HEAD
         log: function () {
-=======
-        log: function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {
                 try {
                     windowConsole.log.apply(windowConsole, arguments);
                 } catch (err) {
-<<<<<<< HEAD
                     _.each(arguments, function (arg) {
-=======
-                    _.each(arguments, function(arg) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         windowConsole.log(arg);
                     });
                 }
             }
         },
         /** @type {function(...*)} */
-<<<<<<< HEAD
         warn: function () {
-=======
-        warn: function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {
                 var args = ['Mixpanel warning:'].concat(_.toArray(arguments));
                 try {
                     windowConsole.warn.apply(windowConsole, args);
                 } catch (err) {
-<<<<<<< HEAD
                     _.each(args, function (arg) {
-=======
-                    _.each(args, function(arg) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         windowConsole.warn(arg);
                     });
                 }
             }
         },
         /** @type {function(...*)} */
-<<<<<<< HEAD
         error: function () {
-=======
-        error: function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {
                 var args = ['Mixpanel error:'].concat(_.toArray(arguments));
                 try {
                     windowConsole.error.apply(windowConsole, args);
                 } catch (err) {
-<<<<<<< HEAD
                     _.each(args, function (arg) {
-=======
-                    _.each(args, function(arg) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         windowConsole.error(arg);
                     });
                 }
             }
         },
         /** @type {function(...*)} */
-<<<<<<< HEAD
         critical: function () {
-=======
-        critical: function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (!_.isUndefined(windowConsole) && windowConsole) {
                 var args = ['Mixpanel error:'].concat(_.toArray(arguments));
                 try {
                     windowConsole.error.apply(windowConsole, args);
                 } catch (err) {
-<<<<<<< HEAD
                     _.each(args, function (arg) {
-=======
-                    _.each(args, function(arg) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         windowConsole.error(arg);
                     });
                 }
@@ -191,22 +117,13 @@
         }
     };
 
-<<<<<<< HEAD
     var log_func_with_prefix = function (func, prefix) {
         return function () {
-=======
-    var log_func_with_prefix = function(func, prefix) {
-        return function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             arguments[0] = '[' + prefix + '] ' + arguments[0];
             return func.apply(console, arguments);
         };
     };
-<<<<<<< HEAD
     var console_with_prefix = function (prefix) {
-=======
-    var console_with_prefix = function(prefix) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return {
             log: log_func_with_prefix(console.log, prefix),
             error: log_func_with_prefix(console.error, prefix),
@@ -217,11 +134,7 @@
 
     // UNDERSCORE
     // Embed part of the Underscore Library
-<<<<<<< HEAD
     _.bind = function (func, context) {
-=======
-    _.bind = function(func, context) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var args, bound;
         if (nativeBind && func.bind === nativeBind) {
             return nativeBind.apply(func, slice.call(arguments, 1));
@@ -230,11 +143,7 @@
             throw new TypeError();
         }
         args = slice.call(arguments, 2);
-<<<<<<< HEAD
         bound = function () {
-=======
-        bound = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (!(this instanceof bound)) {
                 return func.apply(context, args.concat(slice.call(arguments)));
             }
@@ -256,11 +165,7 @@
      * @param {function(...*)=} iterator
      * @param {Object=} context
      */
-<<<<<<< HEAD
     _.each = function (obj, iterator, context) {
-=======
-    _.each = function(obj, iterator, context) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (obj === null || obj === undefined) {
             return;
         }
@@ -283,13 +188,8 @@
         }
     };
 
-<<<<<<< HEAD
     _.extend = function (obj) {
         _.each(slice.call(arguments, 1), function (source) {
-=======
-    _.extend = function(obj) {
-        _.each(slice.call(arguments, 1), function(source) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             for (var prop in source) {
                 if (source[prop] !== void 0) {
                     obj[prop] = source[prop];
@@ -299,22 +199,14 @@
         return obj;
     };
 
-<<<<<<< HEAD
     _.isArray = nativeIsArray || function (obj) {
-=======
-    _.isArray = nativeIsArray || function(obj) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return toString.call(obj) === '[object Array]';
     };
 
     // from a comment on http://dbj.org/dbj/?p=286
     // fails on only one very rare and deliberate custom object:
     // var bomb = { toString : undefined, valueOf: function(o) { return "function BOMBA!"; }};
-<<<<<<< HEAD
     _.isFunction = function (f) {
-=======
-    _.isFunction = function(f) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         try {
             return /^\s*\bfunction\b/.test(f);
         } catch (x) {
@@ -322,19 +214,11 @@
         }
     };
 
-<<<<<<< HEAD
     _.isArguments = function (obj) {
         return !!(obj && hasOwnProperty.call(obj, 'callee'));
     };
 
     _.toArray = function (iterable) {
-=======
-    _.isArguments = function(obj) {
-        return !!(obj && hasOwnProperty.call(obj, 'callee'));
-    };
-
-    _.toArray = function(iterable) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (!iterable) {
             return [];
         }
@@ -350,69 +234,41 @@
         return _.values(iterable);
     };
 
-<<<<<<< HEAD
     _.map = function (arr, callback, context) {
-=======
-    _.map = function(arr, callback, context) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (nativeMap && arr.map === nativeMap) {
             return arr.map(callback, context);
         } else {
             var results = [];
-<<<<<<< HEAD
             _.each(arr, function (item) {
-=======
-            _.each(arr, function(item) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 results.push(callback.call(context, item));
             });
             return results;
         }
     };
 
-<<<<<<< HEAD
     _.keys = function (obj) {
-=======
-    _.keys = function(obj) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var results = [];
         if (obj === null) {
             return results;
         }
-<<<<<<< HEAD
         _.each(obj, function (value, key) {
-=======
-        _.each(obj, function(value, key) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             results[results.length] = key;
         });
         return results;
     };
 
-<<<<<<< HEAD
     _.values = function (obj) {
-=======
-    _.values = function(obj) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var results = [];
         if (obj === null) {
             return results;
         }
-<<<<<<< HEAD
         _.each(obj, function (value) {
-=======
-        _.each(obj, function(value) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             results[results.length] = value;
         });
         return results;
     };
 
-<<<<<<< HEAD
     _.include = function (obj, target) {
-=======
-    _.include = function(obj, target) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var found = false;
         if (obj === null) {
             return found;
@@ -420,11 +276,7 @@
         if (nativeIndexOf && obj.indexOf === nativeIndexOf) {
             return obj.indexOf(target) != -1;
         }
-<<<<<<< HEAD
         _.each(obj, function (value) {
-=======
-        _.each(obj, function(value) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (found || (found = (value === target))) {
                 return breaker;
             }
@@ -432,39 +284,23 @@
         return found;
     };
 
-<<<<<<< HEAD
     _.includes = function (str, needle) {
-=======
-    _.includes = function(str, needle) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return str.indexOf(needle) !== -1;
     };
 
     // Underscore Addons
-<<<<<<< HEAD
     _.inherit = function (subclass, superclass) {
-=======
-    _.inherit = function(subclass, superclass) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         subclass.prototype = new superclass();
         subclass.prototype.constructor = subclass;
         subclass.superclass = superclass.prototype;
         return subclass;
     };
 
-<<<<<<< HEAD
     _.isObject = function (obj) {
         return (obj === Object(obj) && !_.isArray(obj));
     };
 
     _.isEmptyObject = function (obj) {
-=======
-    _.isObject = function(obj) {
-        return (obj === Object(obj) && !_.isArray(obj));
-    };
-
-    _.isEmptyObject = function(obj) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (_.isObject(obj)) {
             for (var key in obj) {
                 if (hasOwnProperty.call(obj, key)) {
@@ -476,7 +312,6 @@
         return false;
     };
 
-<<<<<<< HEAD
     _.isUndefined = function (obj) {
         return obj === void 0;
     };
@@ -499,30 +334,6 @@
 
     _.encodeDates = function (obj) {
         _.each(obj, function (v, k) {
-=======
-    _.isUndefined = function(obj) {
-        return obj === void 0;
-    };
-
-    _.isString = function(obj) {
-        return toString.call(obj) == '[object String]';
-    };
-
-    _.isDate = function(obj) {
-        return toString.call(obj) == '[object Date]';
-    };
-
-    _.isNumber = function(obj) {
-        return toString.call(obj) == '[object Number]';
-    };
-
-    _.isElement = function(obj) {
-        return !!(obj && obj.nodeType === 1);
-    };
-
-    _.encodeDates = function(obj) {
-        _.each(obj, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (_.isDate(v)) {
                 obj[k] = _.formatDate(v);
             } else if (_.isObject(v)) {
@@ -532,23 +343,14 @@
         return obj;
     };
 
-<<<<<<< HEAD
     _.timestamp = function () {
         Date.now = Date.now || function () {
-=======
-    _.timestamp = function() {
-        Date.now = Date.now || function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             return +new Date;
         };
         return Date.now();
     };
 
-<<<<<<< HEAD
     _.formatDate = function (d) {
-=======
-    _.formatDate = function(d) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         // YYYY-MM-DDTHH:MM:SS in UTC
         function pad(n) {
             return n < 10 ? '0' + n : n;
@@ -561,15 +363,9 @@
             pad(d.getUTCSeconds());
     };
 
-<<<<<<< HEAD
     _.strip_empty_properties = function (p) {
         var ret = {};
         _.each(p, function (v, k) {
-=======
-    _.strip_empty_properties = function(p) {
-        var ret = {};
-        _.each(p, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (_.isString(v) && v.length > 0) {
                 ret[k] = v;
             }
@@ -582,7 +378,6 @@
      * passed an Array or Object it will iterate through obj and
      * truncate all the values recursively.
      */
-<<<<<<< HEAD
     _.truncate = function (obj, length) {
         var ret;
 
@@ -591,25 +386,11 @@
         } else if (_.isArray(obj)) {
             ret = [];
             _.each(obj, function (val) {
-=======
-    _.truncate = function(obj, length) {
-        var ret;
-
-        if (typeof(obj) === 'string') {
-            ret = obj.slice(0, length);
-        } else if (_.isArray(obj)) {
-            ret = [];
-            _.each(obj, function(val) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 ret.push(_.truncate(val, length));
             });
         } else if (_.isObject(obj)) {
             ret = {};
-<<<<<<< HEAD
             _.each(obj, function (val, key) {
-=======
-            _.each(obj, function(val, key) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 ret[key] = _.truncate(val, length);
             });
         } else {
@@ -619,17 +400,10 @@
         return ret;
     };
 
-<<<<<<< HEAD
     _.JSONEncode = (function () {
         return function (mixed_val) {
             var value = mixed_val;
             var quote = function (string) {
-=======
-    _.JSONEncode = (function() {
-        return function(mixed_val) {
-            var value = mixed_val;
-            var quote = function(string) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 var escapable = /[\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g; // eslint-disable-line no-control-regex
                 var meta = { // table of character substitutions
                     '\b': '\\b',
@@ -643,11 +417,7 @@
 
                 escapable.lastIndex = 0;
                 return escapable.test(string) ?
-<<<<<<< HEAD
                     '"' + string.replace(escapable, function (a) {
-=======
-                    '"' + string.replace(escapable, function(a) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         var c = meta[a];
                         return typeof c === 'string' ? c :
                             '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
@@ -655,11 +425,7 @@
                     '"' + string + '"';
             };
 
-<<<<<<< HEAD
             var str = function (key, holder) {
-=======
-            var str = function(key, holder) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 var gap = '';
                 var indent = '    ';
                 var i = 0; // The loop counter.
@@ -720,13 +486,8 @@
                             // brackets.
                             v = partial.length === 0 ? '[]' :
                                 gap ? '[\n' + gap +
-<<<<<<< HEAD
                                     partial.join(',\n' + gap) + '\n' +
                                     mind + ']' :
-=======
-                                partial.join(',\n' + gap) + '\n' +
-                                mind + ']' :
->>>>>>> 7bd87d6 (Version bumped to latest)
                                     '[' + partial.join(',') + ']';
                             gap = mind;
                             return v;
@@ -746,11 +507,7 @@
                         // and wrap them in braces.
                         v = partial.length === 0 ? '{}' :
                             gap ? '{' + partial.join(',') + '' +
-<<<<<<< HEAD
                                 mind + '}' : '{' + partial.join(',') + '}';
-=======
-                            mind + '}' : '{' + partial.join(',') + '}';
->>>>>>> 7bd87d6 (Version bumped to latest)
                         gap = mind;
                         return v;
                 }
@@ -768,11 +525,7 @@
      * From https://github.com/douglascrockford/JSON-js/blob/master/json_parse.js
      * Slightly modified to throw a real Error rather than a POJO
      */
-<<<<<<< HEAD
     _.JSONDecode = (function () {
-=======
-    _.JSONDecode = (function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var at, // The index of the current character
             ch, // The current character
             escapee = {
@@ -786,21 +539,13 @@
                 't': '\t'
             },
             text,
-<<<<<<< HEAD
             error = function (m) {
-=======
-            error = function(m) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 var e = new SyntaxError(m);
                 e.at = at;
                 e.text = text;
                 throw e;
             },
-<<<<<<< HEAD
             next = function (c) {
-=======
-            next = function(c) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // If a c parameter is provided, verify that it matches the current character.
                 if (c && c !== ch) {
                     error('Expected \'' + c + '\' instead of \'' + ch + '\'');
@@ -811,11 +556,7 @@
                 at += 1;
                 return ch;
             },
-<<<<<<< HEAD
             number = function () {
-=======
-            number = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // Parse a number value.
                 var number,
                     string = '';
@@ -854,11 +595,7 @@
                 }
             },
 
-<<<<<<< HEAD
             string = function () {
-=======
-            string = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // Parse a string value.
                 var hex,
                     i,
@@ -895,21 +632,13 @@
                 }
                 error('Bad string');
             },
-<<<<<<< HEAD
             white = function () {
-=======
-            white = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // Skip whitespace.
                 while (ch && ch <= ' ') {
                     next();
                 }
             },
-<<<<<<< HEAD
             word = function () {
-=======
-            word = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // true, false, or null.
                 switch (ch) {
                     case 't':
@@ -935,11 +664,7 @@
                 error('Unexpected "' + ch + '"');
             },
             value, // Placeholder for the value function.
-<<<<<<< HEAD
             array = function () {
-=======
-            array = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // Parse an array value.
                 var array = [];
 
@@ -963,11 +688,7 @@
                 }
                 error('Bad array');
             },
-<<<<<<< HEAD
             object = function () {
-=======
-            object = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // Parse an object value.
                 var key,
                     object = {};
@@ -999,11 +720,7 @@
                 error('Bad object');
             };
 
-<<<<<<< HEAD
         value = function () {
-=======
-        value = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             // Parse a JSON value. It could be an object, an array, a string,
             // a number, or a word.
             white();
@@ -1023,11 +740,7 @@
 
         // Return the json_parse function. It will have access to all of the
         // above functions and variables.
-<<<<<<< HEAD
         return function (source) {
-=======
-        return function(source) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var result;
 
             text = source;
@@ -1043,11 +756,7 @@
         };
     })();
 
-<<<<<<< HEAD
     _.base64Encode = function (data) {
-=======
-    _.base64Encode = function(data) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
         var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
             ac = 0,
@@ -1090,11 +799,7 @@
         return enc;
     };
 
-<<<<<<< HEAD
     _.utf8Encode = function (string) {
-=======
-    _.utf8Encode = function(string) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         string = (string + '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
         var utftext = '',
@@ -1133,25 +838,14 @@
         return utftext;
     };
 
-<<<<<<< HEAD
     _.UUID = (function () {
 
         // Time-based entropy
         var T = function () {
             var time = 1 * new Date(); // cross-browser version of Date.now()
             var ticks;
-            if (window$1.performance && window$1.performance.now) {
-                ticks = window$1.performance.now();
-=======
-    _.UUID = (function() {
-
-        // Time-based entropy
-        var T = function() {
-            var time = 1 * new Date(); // cross-browser version of Date.now()
-            var ticks;
             if (win.performance && win.performance.now) {
                 ticks = win.performance.now();
->>>>>>> 7bd87d6 (Version bumped to latest)
             } else {
                 // fall back to busy loop
                 ticks = 0;
@@ -1167,11 +861,7 @@
         };
 
         // Math.Random entropy
-<<<<<<< HEAD
         var R = function () {
-=======
-        var R = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             return Math.random().toString(16).replace('.', '');
         };
 
@@ -1179,11 +869,7 @@
         // This function takes the user agent string, and then xors
         // together each sequence of 8 bytes.  This produces a final
         // sequence of 8 bytes which it returns as hex.
-<<<<<<< HEAD
         var UA = function () {
-=======
-        var UA = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var ua = userAgent,
                 i, ch, buffer = [],
                 ret = 0;
@@ -1212,11 +898,7 @@
             return ret.toString(16);
         };
 
-<<<<<<< HEAD
         return function () {
-=======
-        return function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var se = (screen.height * screen.width).toString(16);
             return (T() + '-' + R() + '-' + UA() + '-' + se + '-' + T());
         };
@@ -1227,10 +909,7 @@
     // sending false tracking data
     var BLOCKED_UA_STRS = [
         'ahrefsbot',
-<<<<<<< HEAD
-=======
         'ahrefssiteaudit',
->>>>>>> 7bd87d6 (Version bumped to latest)
         'baiduspider',
         'bingbot',
         'bingpreview',
@@ -1256,11 +935,7 @@
         'mediapartners-google',
         'storebot-google'
     ];
-<<<<<<< HEAD
     _.isBlockedUA = function (ua) {
-=======
-    _.isBlockedUA = function(ua) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var i;
         ua = ua.toLowerCase();
         for (i = 0; i < BLOCKED_UA_STRS.length; i++) {
@@ -1275,22 +950,14 @@
      * @param {Object=} formdata
      * @param {string=} arg_separator
      */
-<<<<<<< HEAD
     _.HTTPBuildQuery = function (formdata, arg_separator) {
-=======
-    _.HTTPBuildQuery = function(formdata, arg_separator) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var use_val, use_key, tmp_arr = [];
 
         if (_.isUndefined(arg_separator)) {
             arg_separator = '&';
         }
 
-<<<<<<< HEAD
         _.each(formdata, function (val, key) {
-=======
-        _.each(formdata, function(val, key) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             use_val = encodeURIComponent(val.toString());
             use_key = encodeURIComponent(key);
             tmp_arr[tmp_arr.length] = use_key + '=' + use_val;
@@ -1299,7 +966,6 @@
         return tmp_arr.join(arg_separator);
     };
 
-<<<<<<< HEAD
     _.getHeimdallReferrer = function () {
         var heimdallReferrer = '';
         try {
@@ -1336,30 +1002,19 @@
     };
 
     _.getQueryParam = function (url, param) {
-=======
-    _.getQueryParam = function(url, param) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         // Expects a raw URL
 
         param = param.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
         var regexS = '[\\?&]' + param + '=([^&#]*)',
             regex = new RegExp(regexS),
             results = regex.exec(url);
-<<<<<<< HEAD
         if (results === null || (results && typeof (results[1]) !== 'string' && results[1].length)) {
-=======
-        if (results === null || (results && typeof(results[1]) !== 'string' && results[1].length)) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             return '';
         } else {
             var result = results[1];
             try {
                 result = decodeURIComponent(result);
-<<<<<<< HEAD
             } catch (err) {
-=======
-            } catch(err) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 console.error('Skipping decoding for malformed query param: ' + result);
             }
             return result.replace(/\+/g, ' ');
@@ -1370,11 +1025,7 @@
     // _.cookie
     // Methods partially borrowed from quirksmode.org/js/cookies.html
     _.cookie = {
-<<<<<<< HEAD
         get: function (name) {
-=======
-        get: function(name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var nameEQ = name + '=';
             var ca = document$1.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
@@ -1389,11 +1040,7 @@
             return null;
         },
 
-<<<<<<< HEAD
         parse: function (name) {
-=======
-        parse: function(name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var cookie;
             try {
                 cookie = _.JSONDecode(_.cookie.get(name)) || {};
@@ -1403,11 +1050,7 @@
             return cookie;
         },
 
-<<<<<<< HEAD
         set_seconds: function (name, value, seconds, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
-=======
-        set_seconds: function(name, value, seconds, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var cdomain = '',
                 expires = '',
                 secure = '';
@@ -1436,11 +1079,7 @@
             document$1.cookie = name + '=' + encodeURIComponent(value) + expires + '; path=/' + cdomain + secure;
         },
 
-<<<<<<< HEAD
         set: function (name, value, days, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
-=======
-        set: function(name, value, days, is_cross_subdomain, is_secure, is_cross_site, domain_override) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var cdomain = '', expires = '', secure = '';
 
             if (domain_override) {
@@ -1469,21 +1108,13 @@
             return new_cookie_val;
         },
 
-<<<<<<< HEAD
         remove: function (name, is_cross_subdomain, domain_override) {
-=======
-        remove: function(name, is_cross_subdomain, domain_override) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             _.cookie.set(name, '', -1, is_cross_subdomain, false, false, domain_override);
         }
     };
 
     var _localStorageSupported = null;
-<<<<<<< HEAD
     var localStorageSupported = function (storage, forceCheck) {
-=======
-    var localStorageSupported = function(storage, forceCheck) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (_localStorageSupported !== null && !forceCheck) {
             return _localStorageSupported;
         }
@@ -1508,11 +1139,7 @@
 
     // _.localStorage
     _.localStorage = {
-<<<<<<< HEAD
         is_supported: function (force_check) {
-=======
-        is_supported: function(force_check) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var supported = localStorageSupported(null, force_check);
             if (!supported) {
                 console.error('localStorage unsupported; falling back to cookie store');
@@ -1520,19 +1147,11 @@
             return supported;
         },
 
-<<<<<<< HEAD
         error: function (msg) {
             console.error('localStorage error: ' + msg);
         },
 
         get: function (name) {
-=======
-        error: function(msg) {
-            console.error('localStorage error: ' + msg);
-        },
-
-        get: function(name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             try {
                 return window.localStorage.getItem(name);
             } catch (err) {
@@ -1541,11 +1160,7 @@
             return null;
         },
 
-<<<<<<< HEAD
         parse: function (name) {
-=======
-        parse: function(name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             try {
                 return _.JSONDecode(_.localStorage.get(name)) || {};
             } catch (err) {
@@ -1554,11 +1169,7 @@
             return null;
         },
 
-<<<<<<< HEAD
         set: function (name, value) {
-=======
-        set: function(name, value) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             try {
                 window.localStorage.setItem(name, value);
             } catch (err) {
@@ -1566,11 +1177,7 @@
             }
         },
 
-<<<<<<< HEAD
         remove: function (name) {
-=======
-        remove: function(name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             try {
                 window.localStorage.removeItem(name);
             } catch (err) {
@@ -1579,11 +1186,7 @@
         }
     };
 
-<<<<<<< HEAD
     _.register_event = (function () {
-=======
-    _.register_event = (function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         // written by Dean Edwards, 2005
         // with input from Tino Zijdel - crisp@xs4all.nl
         // with input from Carl Sverre - mail@carlsverre.com
@@ -1598,11 +1201,7 @@
          * @param {boolean=} oldSchool
          * @param {boolean=} useCapture
          */
-<<<<<<< HEAD
         var register_event = function (element, type, handler, oldSchool, useCapture) {
-=======
-        var register_event = function(element, type, handler, oldSchool, useCapture) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (!element) {
                 console.error('No valid element provided to register_event');
                 return;
@@ -1618,11 +1217,7 @@
         };
 
         function makeHandler(element, new_handler, old_handlers) {
-<<<<<<< HEAD
             var handler = function (event) {
-=======
-            var handler = function(event) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 event = event || fixEvent(window.event);
 
                 // this basically happens in firefox whenever another script
@@ -1659,17 +1254,10 @@
             }
             return event;
         }
-<<<<<<< HEAD
         fixEvent.preventDefault = function () {
             this.returnValue = false;
         };
         fixEvent.stopPropagation = function () {
-=======
-        fixEvent.preventDefault = function() {
-            this.returnValue = false;
-        };
-        fixEvent.stopPropagation = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             this.cancelBubble = true;
         };
 
@@ -1679,11 +1267,7 @@
 
     var TOKEN_MATCH_REGEX = new RegExp('^(\\w*)\\[(\\w+)([=~\\|\\^\\$\\*]?)=?"?([^\\]"]*)"?\\]$');
 
-<<<<<<< HEAD
     _.dom_query = (function () {
-=======
-    _.dom_query = (function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         /* document.getElementsBySelector(selector)
         - returns an array of element objects from the current document
         matching the CSS selector. Selectors can contain element names,
@@ -1806,66 +1390,38 @@
                     var checkFunction; // This function will be used to filter the elements
                     switch (attrOperator) {
                         case '=': // Equality
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return (e.getAttribute(attrName) == attrValue);
                             };
                             break;
                         case '~': // Match one of space seperated words
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return (e.getAttribute(attrName).match(new RegExp('\\b' + attrValue + '\\b')));
                             };
                             break;
                         case '|': // Match start with value followed by optional hyphen
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return (e.getAttribute(attrName).match(new RegExp('^' + attrValue + '-?')));
                             };
                             break;
                         case '^': // Match starts with value
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return (e.getAttribute(attrName).indexOf(attrValue) === 0);
                             };
                             break;
                         case '$': // Match ends with value - fails with "Warning" in Opera 7
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return (e.getAttribute(attrName).lastIndexOf(attrValue) == e.getAttribute(attrName).length - attrValue.length);
                             };
                             break;
                         case '*': // Match ends with value
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return (e.getAttribute(attrName).indexOf(attrValue) > -1);
                             };
                             break;
                         default:
                             // Just test for existence of attribute
-<<<<<<< HEAD
                             checkFunction = function (e) {
-=======
-                            checkFunction = function(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 return e.getAttribute(attrName);
                             };
                     }
@@ -1894,11 +1450,7 @@
             return currentContext;
         }
 
-<<<<<<< HEAD
         return function (query) {
-=======
-        return function(query) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (_.isElement(query)) {
                 return [query];
             } else if (_.isObject(query) && !_.isUndefined(query.length)) {
@@ -1913,17 +1465,10 @@
     var CLICK_IDS = ['dclid', 'fbclid', 'gclid', 'ko_click_id', 'li_fat_id', 'msclkid', 'ttclid', 'twclid', 'wbraid'];
 
     _.info = {
-<<<<<<< HEAD
         campaignParams: function (default_value) {
             var kw = '',
                 params = {};
             _.each(CAMPAIGN_KEYWORDS, function (kwkey) {
-=======
-        campaignParams: function(default_value) {
-            var kw = '',
-                params = {};
-            _.each(CAMPAIGN_KEYWORDS, function(kwkey) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 kw = _.getQueryParam(document$1.URL, kwkey);
                 if (kw.length) {
                     params[kwkey] = kw;
@@ -1935,17 +1480,10 @@
             return params;
         },
 
-<<<<<<< HEAD
         clickParams: function () {
             var id = '',
                 params = {};
             _.each(CLICK_IDS, function (idkey) {
-=======
-        clickParams: function() {
-            var id = '',
-                params = {};
-            _.each(CLICK_IDS, function(idkey) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 id = _.getQueryParam(document$1.URL, idkey);
                 if (id.length) {
                     params[idkey] = id;
@@ -1955,19 +1493,11 @@
             return params;
         },
 
-<<<<<<< HEAD
         marketingParams: function () {
             return _.extend(_.info.campaignParams(), _.info.clickParams());
         },
 
         searchEngine: function (referrer) {
-=======
-        marketingParams: function() {
-            return _.extend(_.info.campaignParams(), _.info.clickParams());
-        },
-
-        searchEngine: function(referrer) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (referrer.search('https?://(.*)google.([^/?]*)') === 0) {
                 return 'google';
             } else if (referrer.search('https?://(.*)bing.com') === 0) {
@@ -1981,11 +1511,7 @@
             }
         },
 
-<<<<<<< HEAD
         searchInfo: function (referrer) {
-=======
-        searchInfo: function(referrer) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var search = _.info.searchEngine(referrer),
                 param = (search != 'yahoo') ? 'q' : 'p',
                 ret = {};
@@ -2007,11 +1533,7 @@
          * The order of the checks are important since many user agents
          * include key words used in later checks.
          */
-<<<<<<< HEAD
         browser: function (user_agent, vendor, opera) {
-=======
-        browser: function(user_agent, vendor, opera) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             vendor = vendor || ''; // vendor is undefined for at least IE9
             if (opera || _.includes(user_agent, ' OPR/')) {
                 if (_.includes(user_agent, 'Mini')) {
@@ -2062,22 +1584,14 @@
          * parsing major and minor version (e.g., 42.1). User agent strings from:
          * http://www.useragentstring.com/pages/useragentstring.php
          */
-<<<<<<< HEAD
         browserVersion: function (userAgent, vendor, opera) {
-=======
-        browserVersion: function(userAgent, vendor, opera) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var browser = _.info.browser(userAgent, vendor, opera);
             var versionRegexs = {
                 'Internet Explorer Mobile': /rv:(\d+(\.\d+)?)/,
                 'Microsoft Edge': /Edge?\/(\d+(\.\d+)?)/,
                 'Chrome': /Chrome\/(\d+(\.\d+)?)/,
                 'Chrome iOS': /CriOS\/(\d+(\.\d+)?)/,
-<<<<<<< HEAD
                 'UC Browser': /(UCBrowser|UCWEB)\/(\d+(\.\d+)?)/,
-=======
-                'UC Browser' : /(UCBrowser|UCWEB)\/(\d+(\.\d+)?)/,
->>>>>>> 7bd87d6 (Version bumped to latest)
                 'Safari': /Version\/(\d+(\.\d+)?)/,
                 'Mobile Safari': /Version\/(\d+(\.\d+)?)/,
                 'Opera': /(Opera|OPR)\/(\d+(\.\d+)?)/,
@@ -2101,11 +1615,7 @@
             return parseFloat(matches[matches.length - 2]);
         },
 
-<<<<<<< HEAD
         os: function () {
-=======
-        os: function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var a = userAgent;
             if (/Windows/i.test(a)) {
                 if (/Phone/.test(a) || /WPDesktop/.test(a)) {
@@ -2129,11 +1639,7 @@
             }
         },
 
-<<<<<<< HEAD
         device: function (user_agent) {
-=======
-        device: function(user_agent) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (/Windows Phone/i.test(user_agent) || /WPDesktop/.test(user_agent)) {
                 return 'Windows Phone';
             } else if (/iPad/.test(user_agent)) {
@@ -2151,11 +1657,7 @@
             }
         },
 
-<<<<<<< HEAD
         referringDomain: function (referrer) {
-=======
-        referringDomain: function(referrer) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             var split = referrer.split('/');
             if (split.length >= 3) {
                 return split[2];
@@ -2163,18 +1665,14 @@
             return '';
         },
 
-<<<<<<< HEAD
-        properties: function () {
-=======
-        currentUrl: function() {
+        currentUrl: function () {
             return win.location.href;
         },
 
-        properties: function(extra_props) {
+        properties: function (extra_props) {
             if (typeof extra_props !== 'object') {
                 extra_props = {};
             }
->>>>>>> 7bd87d6 (Version bumped to latest)
             return _.extend(_.strip_empty_properties({
                 '$os': _.info.os(),
                 '$browser': _.info.browser(userAgent, navigator.vendor, windowOpera),
@@ -2182,13 +1680,9 @@
                 '$referring_domain': _.info.referringDomain(document$1.referrer),
                 '$device': _.info.device(userAgent)
             }), {
-<<<<<<< HEAD
-                '$current_url': window$1.location.href,
-                '$current_url_params': _.getAllQueryParams(window$1.location.search),
-                '$heimdall_referrer': _.getHeimdallReferrer(), // TODO hack for now since we want to send this for default events as well
-=======
                 '$current_url': _.info.currentUrl(),
->>>>>>> 7bd87d6 (Version bumped to latest)
+                '$current_url_params': _.getAllQueryParams(win.location.search),
+                '$heimdall_referrer': _.getHeimdallReferrer(), // TODO hack for now since we want to send this for default events as well
                 '$browser_version': _.info.browserVersion(userAgent, navigator.vendor, windowOpera),
                 '$screen_height': screen.height,
                 '$screen_width': screen.width,
@@ -2196,17 +1690,10 @@
                 '$lib_version': Config.LIB_VERSION,
                 '$insert_id': cheap_guid(),
                 'time': _.timestamp() / 1000 // epoch time in seconds
-<<<<<<< HEAD
-            });
-        },
-
-        people_properties: function () {
-=======
             }, _.strip_empty_properties(extra_props));
         },
 
-        people_properties: function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
+        people_properties: function () {
             return _.extend(_.strip_empty_properties({
                 '$os': _.info.os(),
                 '$browser': _.info.browser(userAgent, navigator.vendor, windowOpera)
@@ -2215,14 +1702,13 @@
             });
         },
 
-<<<<<<< HEAD
         mpPageViewProperties: function () {
             var defaultProps = _.strip_empty_properties({
                 'current_page_title': document$1.title,
-                'current_domain': window$1.location.hostname,
-                'current_url_path': window$1.location.pathname,
-                'current_url_protocol': window$1.location.protocol,
-                'current_url_search': window$1.location.search
+                'current_domain': win.location.hostname,
+                'current_url_path': win.location.pathname,
+                'current_url_protocol': win.location.protocol,
+                'current_url_search': win.location.search
             });
             // var URLParams = _.getAllQueryParams(win.location.search);
             // if (!_.isEmptyObject(URLParams)) {
@@ -2233,20 +1719,6 @@
     };
 
     var cheap_guid = function (maxlen) {
-=======
-        mpPageViewProperties: function() {
-            return _.strip_empty_properties({
-                'current_page_title': document$1.title,
-                'current_domain': win.location.hostname,
-                'current_url_path': win.location.pathname,
-                'current_url_protocol': win.location.protocol,
-                'current_url_search': win.location.search
-            });
-        }
-    };
-
-    var cheap_guid = function(maxlen) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var guid = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
         return maxlen ? guid.substring(0, maxlen) : guid;
     };
@@ -2268,11 +1740,7 @@
      * extract_domain('my.sub.example.com')
      * // 'example.com'
      */
-<<<<<<< HEAD
     var extract_domain = function (hostname) {
-=======
-    var extract_domain = function(hostname) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var domain_regex = DOMAIN_MATCH_REGEX;
         var parts = hostname.split('.');
         var tld = parts[parts.length - 1];
@@ -2283,12 +1751,7 @@
         return matches ? matches[0] : '';
     };
 
-<<<<<<< HEAD
-    var JSONStringify = null;
-    var JSONParse = null;
-=======
     var JSONStringify = null, JSONParse = null;
->>>>>>> 7bd87d6 (Version bumped to latest)
     if (typeof JSON !== 'undefined') {
         JSONStringify = JSON.stringify;
         JSONParse = JSON.parse;
@@ -2297,7 +1760,6 @@
     JSONParse = JSONParse || _.JSONDecode;
 
     // EXPORTS (for closure compiler)
-<<<<<<< HEAD
     _['toArray'] = _.toArray;
     _['isObject'] = _.isObject;
     _['JSONEncode'] = _.JSONEncode;
@@ -2309,21 +1771,8 @@
     _['info']['browser'] = _.info.browser;
     _['info']['browserVersion'] = _.info.browserVersion;
     _['info']['properties'] = _.info.properties;
-=======
-    _['toArray']                = _.toArray;
-    _['isObject']               = _.isObject;
-    _['JSONEncode']             = _.JSONEncode;
-    _['JSONDecode']             = _.JSONDecode;
-    _['isBlockedUA']            = _.isBlockedUA;
-    _['isEmptyObject']          = _.isEmptyObject;
-    _['info']                   = _.info;
-    _['info']['device']         = _.info.device;
-    _['info']['browser']        = _.info.browser;
-    _['info']['browserVersion'] = _.info.browserVersion;
-    _['info']['properties']     = _.info.properties;
 
     /* eslint camelcase: "off" */
->>>>>>> 7bd87d6 (Version bumped to latest)
 
     /**
      * DomTracker Object
@@ -2474,11 +1923,6 @@
         }, 0);
     };
 
-<<<<<<< HEAD
-    // eslint-disable-line camelcase
-
-=======
->>>>>>> 7bd87d6 (Version bumped to latest)
     var logger$2 = console_with_prefix('lock');
 
     /**
@@ -2625,11 +2069,6 @@
         }
     };
 
-<<<<<<< HEAD
-    // eslint-disable-line camelcase
-
-=======
->>>>>>> 7bd87d6 (Version bumped to latest)
     var logger$1 = console_with_prefix('batch');
 
     /**
@@ -2907,11 +2346,6 @@
         this.storage.removeItem(this.storageKey);
     };
 
-<<<<<<< HEAD
-    // eslint-disable-line camelcase
-
-=======
->>>>>>> 7bd87d6 (Version bumped to latest)
     // maximum interval between request retries after exponential backoff
     var MAX_RETRY_INTERVAL_MS = 10 * 60 * 1000; // 10 minutes
 
@@ -3207,8 +2641,6 @@
     };
 
     /**
-<<<<<<< HEAD
-=======
      * GDPR utils
      *
      * The General Data Protection Regulation (GDPR) is a regulation in EU law on data protection
@@ -3222,7 +2654,6 @@
      */
 
     /**
->>>>>>> 7bd87d6 (Version bumped to latest)
      * A function used to track a Mixpanel event (e.g. MixpanelLib.track)
      * @callback trackFunction
      * @param {String} event_name The name of the event. This can be anything the user does - 'Button Click', 'Sign Up', 'Item Purchased', etc.
@@ -3407,23 +2838,14 @@
         if (options && options.ignoreDnt) {
             return false;
         }
-<<<<<<< HEAD
-        var win = (options && options.window) || window$1;
-        var nav = win['navigator'] || {};
-=======
         var win$1 = (options && options.window) || win;
         var nav = win$1['navigator'] || {};
->>>>>>> 7bd87d6 (Version bumped to latest)
         var hasDntOn = false;
 
         _.each([
             nav['doNotTrack'], // standard
             nav['msDoNotTrack'],
-<<<<<<< HEAD
-            win['doNotTrack']
-=======
             win$1['doNotTrack']
->>>>>>> 7bd87d6 (Version bumped to latest)
         ], function(dntValue) {
             if (_.includes([true, 1, '1', 'yes'], dntValue)) {
                 hasDntOn = true;
@@ -3517,11 +2939,8 @@
         };
     }
 
-<<<<<<< HEAD
-=======
     /* eslint camelcase: "off" */
 
->>>>>>> 7bd87d6 (Version bumped to latest)
     /** @const */ var SET_ACTION      = '$set';
     /** @const */ var SET_ONCE_ACTION = '$set_once';
     /** @const */ var UNSET_ACTION    = '$unset';
@@ -3639,11 +3058,8 @@
         }
     };
 
-<<<<<<< HEAD
-=======
     /* eslint camelcase: "off" */
 
->>>>>>> 7bd87d6 (Version bumped to latest)
     /**
      * Mixpanel Group Object
      * @constructor
@@ -3812,11 +3228,8 @@
     MixpanelGroup.prototype['unset']    = MixpanelGroup.prototype.unset;
     MixpanelGroup.prototype['toString'] = MixpanelGroup.prototype.toString;
 
-<<<<<<< HEAD
-=======
     /* eslint camelcase: "off" */
 
->>>>>>> 7bd87d6 (Version bumped to latest)
     /**
      * Mixpanel People Object
      * @constructor
@@ -3862,10 +3275,6 @@
         data[SET_ACTION] = _.extend(
             {},
             _.info.people_properties(),
-<<<<<<< HEAD
-            this._mixpanel['persistence'].get_referrer_info(),
-=======
->>>>>>> 7bd87d6 (Version bumped to latest)
             data[SET_ACTION]
         );
         return this._send_request(data, callback);
@@ -4289,7 +3698,8 @@
     MixpanelPeople.prototype['delete_user']   = MixpanelPeople.prototype.delete_user;
     MixpanelPeople.prototype['toString']      = MixpanelPeople.prototype.toString;
 
-<<<<<<< HEAD
+    /* eslint camelcase: "off" */
+
     /*
      * Constants
      */
@@ -4304,24 +3714,6 @@
     /** @const */ var PEOPLE_DISTINCT_ID_KEY = '$people_distinct_id';
     /** @const */ var ALIAS_ID_KEY = '__alias';
     /** @const */ var EVENT_TIMERS_KEY = '__timers';
-=======
-    /* eslint camelcase: "off" */
-
-    /*
-     * Constants
-     */
-    /** @const */ var SET_QUEUE_KEY          = '__mps';
-    /** @const */ var SET_ONCE_QUEUE_KEY     = '__mpso';
-    /** @const */ var UNSET_QUEUE_KEY        = '__mpus';
-    /** @const */ var ADD_QUEUE_KEY          = '__mpa';
-    /** @const */ var APPEND_QUEUE_KEY       = '__mpap';
-    /** @const */ var REMOVE_QUEUE_KEY       = '__mpr';
-    /** @const */ var UNION_QUEUE_KEY        = '__mpu';
-    // This key is deprecated, but we want to check for it to see whether aliasing is allowed.
-    /** @const */ var PEOPLE_DISTINCT_ID_KEY = '$people_distinct_id';
-    /** @const */ var ALIAS_ID_KEY           = '__alias';
-    /** @const */ var EVENT_TIMERS_KEY       = '__timers';
->>>>>>> 7bd87d6 (Version bumped to latest)
     /** @const */ var RESERVED_PROPERTIES = [
         SET_QUEUE_KEY,
         SET_ONCE_QUEUE_KEY,
@@ -4339,11 +3731,7 @@
      * Mixpanel Persistence Object
      * @constructor
      */
-<<<<<<< HEAD
     var MixpanelPersistence = function (config) {
-=======
-    var MixpanelPersistence = function(config) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this['props'] = {};
         this.campaign_params_saved = false;
 
@@ -4371,21 +3759,13 @@
         this.save();
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.properties = function () {
-=======
-    MixpanelPersistence.prototype.properties = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var p = {};
 
         this.load();
 
         // Filter out reserved properties
-<<<<<<< HEAD
         _.each(this['props'], function (v, k) {
-=======
-        _.each(this['props'], function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (!_.include(RESERVED_PROPERTIES, k)) {
                 p[k] = v;
             }
@@ -4393,11 +3773,7 @@
         return p;
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.load = function () {
-=======
-    MixpanelPersistence.prototype.load = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (this.disabled) { return; }
 
         var entry = this.storage.parse(this.name);
@@ -4407,11 +3783,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.upgrade = function (config) {
-=======
-    MixpanelPersistence.prototype.upgrade = function(config) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var upgrade_from_old_lib = config['upgrade'],
             old_cookie_name,
             old_cookie;
@@ -4419,11 +3791,7 @@
         if (upgrade_from_old_lib) {
             old_cookie_name = 'mp_super_properties';
             // Case where they had a custom cookie name before.
-<<<<<<< HEAD
             if (typeof (upgrade_from_old_lib) === 'string') {
-=======
-            if (typeof(upgrade_from_old_lib) === 'string') {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 old_cookie_name = upgrade_from_old_lib;
             }
 
@@ -4470,11 +3838,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.save = function () {
-=======
-    MixpanelPersistence.prototype.save = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (this.disabled) { return; }
 
         this.storage.set(
@@ -4488,20 +3852,12 @@
         );
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.load_prop = function (key) {
-=======
-    MixpanelPersistence.prototype.load_prop = function(key) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.load();
         return this['props'][key];
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.remove = function () {
-=======
-    MixpanelPersistence.prototype.remove = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         // remove both domain and subdomain cookies
         this.storage.remove(this.name, false, this.cookie_domain);
         this.storage.remove(this.name, true, this.cookie_domain);
@@ -4509,11 +3865,7 @@
 
     // removes the storage entry and deletes all loaded data
     // forced name for tests
-<<<<<<< HEAD
     MixpanelPersistence.prototype.clear = function () {
-=======
-    MixpanelPersistence.prototype.clear = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.remove();
         this['props'] = {};
     };
@@ -4523,7 +3875,6 @@
     * @param {*=} default_value
     * @param {number=} days
     */
-<<<<<<< HEAD
     MixpanelPersistence.prototype.register_once = function (props, default_value, days) {
         if (_.isObject(props)) {
             if (typeof (default_value) === 'undefined') { default_value = 'None'; }
@@ -4532,16 +3883,6 @@
             this.load();
 
             _.each(props, function (val, prop) {
-=======
-    MixpanelPersistence.prototype.register_once = function(props, default_value, days) {
-        if (_.isObject(props)) {
-            if (typeof(default_value) === 'undefined') { default_value = 'None'; }
-            this.expire_days = (typeof(days) === 'undefined') ? this.default_expiry : days;
-
-            this.load();
-
-            _.each(props, function(val, prop) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 if (!this['props'].hasOwnProperty(prop) || this['props'][prop] === default_value) {
                     this['props'][prop] = val;
                 }
@@ -4558,15 +3899,9 @@
     * @param {Object} props
     * @param {number=} days
     */
-<<<<<<< HEAD
     MixpanelPersistence.prototype.register = function (props, days) {
         if (_.isObject(props)) {
             this.expire_days = (typeof (days) === 'undefined') ? this.default_expiry : days;
-=======
-    MixpanelPersistence.prototype.register = function(props, days) {
-        if (_.isObject(props)) {
-            this.expire_days = (typeof(days) === 'undefined') ? this.default_expiry : days;
->>>>>>> 7bd87d6 (Version bumped to latest)
 
             this.load();
             _.extend(this['props'], props);
@@ -4577,11 +3912,7 @@
         return false;
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.unregister = function (prop) {
-=======
-    MixpanelPersistence.prototype.unregister = function(prop) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.load();
         if (prop in this['props']) {
             delete this['props'][prop];
@@ -4589,43 +3920,26 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.update_search_keyword = function (referrer) {
-=======
-    MixpanelPersistence.prototype.update_search_keyword = function(referrer) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.register(_.info.searchInfo(referrer));
     };
 
     // EXPORTED METHOD, we test this directly.
-<<<<<<< HEAD
     MixpanelPersistence.prototype.update_referrer_info = function (referrer) {
-=======
-    MixpanelPersistence.prototype.update_referrer_info = function(referrer) {
-        // If referrer doesn't exist, we want to note the fact that it was type-in traffic.
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.register_once({
             '$initial_referrer': referrer || '$direct',
             '$initial_referring_domain': _.info.referringDomain(referrer) || '$direct'
         }, '');
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.get_referrer_info = function () {
-=======
-    MixpanelPersistence.prototype.get_referrer_info = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return _.strip_empty_properties({
             '$initial_referrer': this['props']['$initial_referrer'],
             '$initial_referring_domain': this['props']['$initial_referring_domain']
         });
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.update_config = function (config) {
-=======
-    MixpanelPersistence.prototype.update_config = function(config) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.default_expiry = this.expire_days = config['cookie_expiration'];
         this.set_disabled(config['disable_persistence']);
         this.set_cookie_domain(config['cookie_domain']);
@@ -4634,11 +3948,7 @@
         this.set_secure(config['secure_cookie']);
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.set_disabled = function (disabled) {
-=======
-    MixpanelPersistence.prototype.set_disabled = function(disabled) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this.disabled = disabled;
         if (this.disabled) {
             this.remove();
@@ -4647,11 +3957,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.set_cookie_domain = function (cookie_domain) {
-=======
-    MixpanelPersistence.prototype.set_cookie_domain = function(cookie_domain) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (cookie_domain !== this.cookie_domain) {
             this.remove();
             this.cookie_domain = cookie_domain;
@@ -4659,11 +3965,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.set_cross_site = function (cross_site) {
-=======
-    MixpanelPersistence.prototype.set_cross_site = function(cross_site) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (cross_site !== this.cross_site) {
             this.cross_site = cross_site;
             this.remove();
@@ -4671,11 +3973,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.set_cross_subdomain = function (cross_subdomain) {
-=======
-    MixpanelPersistence.prototype.set_cross_subdomain = function(cross_subdomain) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (cross_subdomain !== this.cross_subdomain) {
             this.cross_subdomain = cross_subdomain;
             this.remove();
@@ -4683,19 +3981,11 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.get_cross_subdomain = function () {
         return this.cross_subdomain;
     };
 
     MixpanelPersistence.prototype.set_secure = function (secure) {
-=======
-    MixpanelPersistence.prototype.get_cross_subdomain = function() {
-        return this.cross_subdomain;
-    };
-
-    MixpanelPersistence.prototype.set_secure = function(secure) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (secure !== this.secure) {
             this.secure = secure ? true : false;
             this.remove();
@@ -4703,11 +3993,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype._add_to_people_queue = function (queue, data) {
-=======
-    MixpanelPersistence.prototype._add_to_people_queue = function(queue, data) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var q_key = this._get_queue_key(queue),
             q_data = data[queue],
             set_q = this._get_or_create_queue(SET_ACTION),
@@ -4730,37 +4016,22 @@
             this._pop_from_people_queue(UNSET_ACTION, q_data);
         } else if (q_key === SET_ONCE_QUEUE_KEY) {
             // only queue the data if there is not already a set_once call for it.
-<<<<<<< HEAD
             _.each(q_data, function (v, k) {
-=======
-            _.each(q_data, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 if (!(k in set_once_q)) {
                     set_once_q[k] = v;
                 }
             });
             this._pop_from_people_queue(UNSET_ACTION, q_data);
         } else if (q_key === UNSET_QUEUE_KEY) {
-<<<<<<< HEAD
             _.each(q_data, function (prop) {
 
                 // undo previously-queued actions on this key
                 _.each([set_q, set_once_q, add_q, union_q], function (enqueued_obj) {
-=======
-            _.each(q_data, function(prop) {
-
-                // undo previously-queued actions on this key
-                _.each([set_q, set_once_q, add_q, union_q], function(enqueued_obj) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     if (prop in enqueued_obj) {
                         delete enqueued_obj[prop];
                     }
                 });
-<<<<<<< HEAD
                 _.each(append_q, function (append_obj) {
-=======
-                _.each(append_q, function(append_obj) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     if (prop in append_obj) {
                         delete append_obj[prop];
                     }
@@ -4770,11 +4041,7 @@
 
             });
         } else if (q_key === ADD_QUEUE_KEY) {
-<<<<<<< HEAD
             _.each(q_data, function (v, k) {
-=======
-            _.each(q_data, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // If it exists in the set queue, increment
                 // the value
                 if (k in set_q) {
@@ -4790,11 +4057,7 @@
             }, this);
             this._pop_from_people_queue(UNSET_ACTION, q_data);
         } else if (q_key === UNION_QUEUE_KEY) {
-<<<<<<< HEAD
             _.each(q_data, function (v, k) {
-=======
-            _.each(q_data, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 if (_.isArray(v)) {
                     if (!(k in union_q)) {
                         union_q[k] = [];
@@ -4818,26 +4081,15 @@
         this.save();
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype._pop_from_people_queue = function (queue, data) {
         var q = this['props'][this._get_queue_key(queue)];
         if (!_.isUndefined(q)) {
             _.each(data, function (v, k) {
-=======
-    MixpanelPersistence.prototype._pop_from_people_queue = function(queue, data) {
-        var q = this['props'][this._get_queue_key(queue)];
-        if (!_.isUndefined(q)) {
-            _.each(data, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 if (queue === APPEND_ACTION || queue === REMOVE_ACTION) {
                     // list actions: only remove if both k+v match
                     // e.g. remove should not override append in a case like
                     // append({foo: 'bar'}); remove({foo: 'qux'})
-<<<<<<< HEAD
                     _.each(q, function (queued_action) {
-=======
-                    _.each(q, function(queued_action) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         if (queued_action[k] === v) {
                             delete queued_action[k];
                         }
@@ -4849,19 +4101,11 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.load_queue = function (queue) {
         return this.load_prop(this._get_queue_key(queue));
     };
 
     MixpanelPersistence.prototype._get_queue_key = function (queue) {
-=======
-    MixpanelPersistence.prototype.load_queue = function(queue) {
-        return this.load_prop(this._get_queue_key(queue));
-    };
-
-    MixpanelPersistence.prototype._get_queue_key = function(queue) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (queue === SET_ACTION) {
             return SET_QUEUE_KEY;
         } else if (queue === SET_ONCE_ACTION) {
@@ -4881,32 +4125,20 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype._get_or_create_queue = function (queue, default_val) {
-=======
-    MixpanelPersistence.prototype._get_or_create_queue = function(queue, default_val) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var key = this._get_queue_key(queue);
         default_val = _.isUndefined(default_val) ? {} : default_val;
         return this['props'][key] || (this['props'][key] = default_val);
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.set_event_timer = function (event_name, timestamp) {
-=======
-    MixpanelPersistence.prototype.set_event_timer = function(event_name, timestamp) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var timers = this.load_prop(EVENT_TIMERS_KEY) || {};
         timers[event_name] = timestamp;
         this['props'][EVENT_TIMERS_KEY] = timers;
         this.save();
     };
 
-<<<<<<< HEAD
     MixpanelPersistence.prototype.remove_event_timer = function (event_name) {
-=======
-    MixpanelPersistence.prototype.remove_event_timer = function(event_name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var timers = this.load_prop(EVENT_TIMERS_KEY) || {};
         var timestamp = timers[event_name];
         if (!_.isUndefined(timestamp)) {
@@ -4916,11 +4148,8 @@
         return timestamp;
     };
 
-<<<<<<< HEAD
-=======
     /* eslint camelcase: "off" */
 
->>>>>>> 7bd87d6 (Version bumped to latest)
     /*
      * Mixpanel JS Library
      *
@@ -4950,7 +4179,6 @@
 
     var init_type;       // MODULE or SNIPPET loader
     var mixpanel_master; // main mixpanel instance / object
-<<<<<<< HEAD
     var INIT_MODULE = 0;
     var INIT_SNIPPET = 1;
 
@@ -4961,18 +4189,6 @@
     /** @const */ var PAYLOAD_TYPE_BASE64 = 'base64';
     /** @const */ var PAYLOAD_TYPE_JSON = 'json';
     /** @const */ var DEVICE_ID_PREFIX = '$device:';
-=======
-    var INIT_MODULE  = 0;
-    var INIT_SNIPPET = 1;
-
-    var IDENTITY_FUNC = function(x) {return x;};
-    var NOOP_FUNC = function() {};
-
-    /** @const */ var PRIMARY_INSTANCE_NAME = 'mixpanel';
-    /** @const */ var PAYLOAD_TYPE_BASE64   = 'base64';
-    /** @const */ var PAYLOAD_TYPE_JSON     = 'json';
-    /** @const */ var DEVICE_ID_PREFIX      = '$device:';
->>>>>>> 7bd87d6 (Version bumped to latest)
 
 
     /*
@@ -4980,11 +4196,7 @@
      */
     // http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/
     // https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#withCredentials
-<<<<<<< HEAD
-    var USE_XHR = (window$1.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest());
-=======
     var USE_XHR = (win.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest());
->>>>>>> 7bd87d6 (Version bumped to latest)
 
     // IE<10 does not support cross-origin XHR's but script tags
     // with defer won't block window.onload; ENQUEUE_REQUESTS
@@ -4994,11 +4206,7 @@
     // save reference to navigator.sendBeacon so it can be minified
     var sendBeacon = null;
     if (navigator['sendBeacon']) {
-<<<<<<< HEAD
         sendBeacon = function () {
-=======
-        sendBeacon = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             // late reference to navigator.sendBeacon to allow patching/spying
             return navigator['sendBeacon'].apply(navigator, arguments);
         };
@@ -5007,19 +4215,14 @@
     var DEFAULT_API_ROUTES = {
         'track': 'track/',
         'engage': 'engage/',
-<<<<<<< HEAD
-        'groups': 'groups/'
-=======
         'groups': 'groups/',
         'record': 'record/'
->>>>>>> 7bd87d6 (Version bumped to latest)
     };
 
     /*
      * Module-level globals
      */
     var DEFAULT_CONFIG = {
-<<<<<<< HEAD
         'api_host': 'https://api-js.mixpanel.com',
         'api_routes': DEFAULT_API_ROUTES,
         'api_method': 'POST',
@@ -5035,10 +4238,12 @@
         'cookie_domain': '',
         'cookie_name': '',
         'loaded': NOOP_FUNC,
+        'mp_loader': null,
         'track_marketing': true,
         'track_pageview': false,
         'skip_first_touch_marketing': false,
         'store_google': true,
+        'stop_utm_persistence': false,
         'save_referrer': true,
         'test': false,
         'verbose': false,
@@ -5063,60 +4268,12 @@
         'batch_flush_interval_ms': 5000,
         'batch_request_timeout_ms': 90000,
         'batch_autostart': true,
-        'hooks': {}
-=======
-        'api_host':                          'https://api-js.mixpanel.com',
-        'api_routes':                        DEFAULT_API_ROUTES,
-        'api_method':                        'POST',
-        'api_transport':                     'XHR',
-        'api_payload_format':                PAYLOAD_TYPE_BASE64,
-        'app_host':                          'https://mixpanel.com',
-        'cdn':                               'https://cdn.mxpnl.com',
-        'cross_site_cookie':                 false,
-        'cross_subdomain_cookie':            true,
-        'error_reporter':                    NOOP_FUNC,
-        'persistence':                       'cookie',
-        'persistence_name':                  '',
-        'cookie_domain':                     '',
-        'cookie_name':                       '',
-        'loaded':                            NOOP_FUNC,
-        'mp_loader':                         null,
-        'track_marketing':                   true,
-        'track_pageview':                    false,
-        'skip_first_touch_marketing':        false,
-        'store_google':                      true,
-        'stop_utm_persistence':              false,
-        'save_referrer':                     true,
-        'test':                              false,
-        'verbose':                           false,
-        'img':                               false,
-        'debug':                             false,
-        'track_links_timeout':               300,
-        'cookie_expiration':                 365,
-        'upgrade':                           false,
-        'disable_persistence':               false,
-        'disable_cookie':                    false,
-        'secure_cookie':                     false,
-        'ip':                                true,
-        'opt_out_tracking_by_default':       false,
-        'opt_out_persistence_by_default':    false,
-        'opt_out_tracking_persistence_type': 'localStorage',
-        'opt_out_tracking_cookie_prefix':    null,
-        'property_blacklist':                [],
-        'xhr_headers':                       {}, // { header: value, header2: value }
-        'ignore_dnt':                        false,
-        'batch_requests':                    true,
-        'batch_size':                        50,
-        'batch_flush_interval_ms':           5000,
-        'batch_request_timeout_ms':          90000,
-        'batch_autostart':                   true,
-        'hooks':                             {},
-        'record_sessions_percent':           0,
-        'record_idle_timeout_ms':            30 * 60 * 1000, // 30 minutes
-        'record_max_ms':                     MAX_RECORDING_MS,
-        'record_mask_text_selector':         '*',
-        'recorder_src':                      'https://cdn.mxpnl.com/libs/mixpanel-recorder.min.js'
->>>>>>> 7bd87d6 (Version bumped to latest)
+        'hooks': {},
+        'record_sessions_percent': 0,
+        'record_idle_timeout_ms': 30 * 60 * 1000, // 30 minutes
+        'record_max_ms': MAX_RECORDING_MS,
+        'record_mask_text_selector': '*',
+        'recorder_src': 'https://cdn.mxpnl.com/libs/mixpanel-recorder.min.js'
     };
 
     var DOM_LOADED = false;
@@ -5125,11 +4282,7 @@
      * Mixpanel Library Object
      * @constructor
      */
-<<<<<<< HEAD
     var MixpanelLib = function () { };
-=======
-    var MixpanelLib = function() {};
->>>>>>> 7bd87d6 (Version bumped to latest)
 
 
     /**
@@ -5140,11 +4293,7 @@
      * initializes document.mixpanel as well as any additional instances
      * declared before this file has loaded).
      */
-<<<<<<< HEAD
     var create_mplib = function (token, config, name) {
-=======
-    var create_mplib = function(token, config, name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var instance,
             target = (name === PRIMARY_INSTANCE_NAME) ? mixpanel_master : mixpanel_master[name];
 
@@ -5173,11 +4322,7 @@
             var utm_params = _.info.campaignParams(null);
             var initial_utm_params = {};
             var has_utm = false;
-<<<<<<< HEAD
             _.each(utm_params, function (utm_value, utm_key) {
-=======
-            _.each(utm_params, function(utm_value, utm_key) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 initial_utm_params['initial_' + utm_key] = utm_value;
                 if (utm_value) {
                     has_utm = true;
@@ -5246,11 +4391,7 @@
     // method is this one initializes the actual instance, whereas the
     // init(...) method sets up a new library and calls _init on it.
     //
-<<<<<<< HEAD
     MixpanelLib.prototype._init = function (token, config, name) {
-=======
-    MixpanelLib.prototype._init = function(token, config, name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         config = config || {};
 
         this['__loaded'] = true;
@@ -5289,21 +4430,13 @@
             if (!_.localStorage.is_supported(true) || !USE_XHR) {
                 this._batch_requests = false;
                 console.log('Turning off Mixpanel request-queueing; needs XHR and localStorage support');
-<<<<<<< HEAD
                 _.each(this.get_batcher_configs(), function (batcher_config) {
-=======
-                _.each(this.get_batcher_configs(), function(batcher_config) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     console.log('Clearing batch queue ' + batcher_config.queue_key);
                     _.localStorage.remove(batcher_config.queue_key);
                 });
             } else {
                 this.init_batchers();
-<<<<<<< HEAD
-                if (sendBeacon && window$1.addEventListener) {
-=======
                 if (sendBeacon && win.addEventListener) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     // Before page closes or hides (user tabs away etc), attempt to flush any events
                     // queued up via navigator.sendBeacon. Since sendBeacon doesn't report success/failure,
                     // events will not be removed from the persistent store; if the site is loaded again,
@@ -5315,30 +4448,17 @@
                     // These events fire when the user clicks away from the current page/tab, so will occur
                     // more frequently than page unload, but are the only mechanism currently for capturing
                     // this scenario somewhat reliably.
-<<<<<<< HEAD
                     var flush_on_unload = _.bind(function () {
                         if (!this.request_batchers.events.stopped) {
                             this.request_batchers.events.flush({ unloading: true });
                         }
                     }, this);
-                    window$1.addEventListener('pagehide', function (ev) {
-=======
-                    var flush_on_unload = _.bind(function() {
-                        if (!this.request_batchers.events.stopped) {
-                            this.request_batchers.events.flush({unloading: true});
-                        }
-                    }, this);
-                    win.addEventListener('pagehide', function(ev) {
->>>>>>> 7bd87d6 (Version bumped to latest)
+                    win.addEventListener('pagehide', function (ev) {
                         if (ev['persisted']) {
                             flush_on_unload();
                         }
                     });
-<<<<<<< HEAD
-                    window$1.addEventListener('visibilitychange', function () {
-=======
-                    win.addEventListener('visibilitychange', function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
+                    win.addEventListener('visibilitychange', function () {
                         if (document$1['visibilityState'] === 'hidden') {
                             flush_on_unload();
                         }
@@ -5362,10 +4482,6 @@
             }, '');
         }
 
-<<<<<<< HEAD
-        if (this.get_config('track_pageview')) {
-            this.track_pageview();
-=======
         var track_pageview_option = this.get_config('track_pageview');
         if (track_pageview_option) {
             this._init_url_change_tracking(track_pageview_option);
@@ -5382,7 +4498,7 @@
             return;
         }
 
-        var handleLoadedRecorder = _.bind(function() {
+        var handleLoadedRecorder = _.bind(function () {
             this._recorder = this._recorder || new win['__mp_recorder'](this);
             this._recorder['startRecording']();
         }, this);
@@ -5404,24 +4520,12 @@
             this._recorder['stopRecording']();
         } else {
             console.critical('Session recorder module not loaded');
->>>>>>> 7bd87d6 (Version bumped to latest)
         }
     };
 
     // Private methods
 
-<<<<<<< HEAD
     MixpanelLib.prototype._loaded = function () {
-        this.get_config('loaded')(this);
-        this._set_default_superprops();
-    };
-
-    // update persistence with info on referrer, UTM params, etc
-    MixpanelLib.prototype._set_default_superprops = function () {
-        this['persistence'].update_search_keyword(document$1.referrer);
-        if (this.get_config('store_google')) {
-=======
-    MixpanelLib.prototype._loaded = function() {
         this.get_config('loaded')(this);
         this._set_default_superprops();
         this['people'].set_once(this['persistence'].get_referrer_info());
@@ -5431,7 +4535,7 @@
         // stop_utm_persistence is `false` by default now but will be default `true` in the future.
         if (this.get_config('store_google') && this.get_config('stop_utm_persistence')) {
             var utm_params = _.info.campaignParams(null);
-            _.each(utm_params, function(_utm_value, utm_key) {
+            _.each(utm_params, function (_utm_value, utm_key) {
                 // We need to unregister persisted UTM parameters so old values
                 // are not mixed with the new UTM parameters
                 this.unregister(utm_key);
@@ -5440,10 +4544,9 @@
     };
 
     // update persistence with info on referrer, UTM params, etc
-    MixpanelLib.prototype._set_default_superprops = function() {
+    MixpanelLib.prototype._set_default_superprops = function () {
         this['persistence'].update_search_keyword(document$1.referrer);
         if (this.get_config('store_google') && !this.get_config('stop_utm_persistence')) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             this.register(_.info.campaignParams());
         }
         if (this.get_config('save_referrer')) {
@@ -5451,22 +4554,13 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype._dom_loaded = function () {
         _.each(this.__dom_loaded_queue, function (item) {
-=======
-    MixpanelLib.prototype._dom_loaded = function() {
-        _.each(this.__dom_loaded_queue, function(item) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             this._track_dom.apply(this, item);
         }, this);
 
         if (!this.has_opted_out_tracking()) {
-<<<<<<< HEAD
             _.each(this.__request_queue, function (item) {
-=======
-            _.each(this.__request_queue, function(item) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 this._send_request.apply(this, item);
             }, this);
         }
@@ -5475,11 +4569,7 @@
         delete this.__request_queue;
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype._track_dom = function (DomClass, args) {
-=======
-    MixpanelLib.prototype._track_dom = function(DomClass, args) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (this.get_config('img')) {
             this.report_error('You can\'t use DOM tracking functions with img = true.');
             return false;
@@ -5494,9 +4584,7 @@
         return dt.track.apply(dt, args);
     };
 
-<<<<<<< HEAD
-=======
-    MixpanelLib.prototype._init_url_change_tracking = function(track_pageview_option) {
+    MixpanelLib.prototype._init_url_change_tracking = function (track_pageview_option) {
         var previous_tracked_url = '';
         var tracked = this.track_pageview();
         if (tracked) {
@@ -5504,27 +4592,27 @@
         }
 
         if (_.include(['full-url', 'url-with-path-and-query-string', 'url-with-path'], track_pageview_option)) {
-            win.addEventListener('popstate', function() {
+            win.addEventListener('popstate', function () {
                 win.dispatchEvent(new Event('mp_locationchange'));
             });
-            win.addEventListener('hashchange', function() {
+            win.addEventListener('hashchange', function () {
                 win.dispatchEvent(new Event('mp_locationchange'));
             });
             var nativePushState = win.history.pushState;
             if (typeof nativePushState === 'function') {
-                win.history.pushState = function(state, unused, url) {
+                win.history.pushState = function (state, unused, url) {
                     nativePushState.call(win.history, state, unused, url);
                     win.dispatchEvent(new Event('mp_locationchange'));
                 };
             }
             var nativeReplaceState = win.history.replaceState;
             if (typeof nativeReplaceState === 'function') {
-                win.history.replaceState = function(state, unused, url) {
+                win.history.replaceState = function (state, unused, url) {
                     nativeReplaceState.call(win.history, state, unused, url);
                     win.dispatchEvent(new Event('mp_locationchange'));
                 };
             }
-            win.addEventListener('mp_locationchange', function() {
+            win.addEventListener('mp_locationchange', function () {
                 var current_url = _.info.currentUrl();
                 var should_track = false;
                 if (track_pageview_option === 'full-url') {
@@ -5545,7 +4633,6 @@
         }
     };
 
->>>>>>> 7bd87d6 (Version bumped to latest)
     /**
      * _prepare_callback() should be called by callers of _send_request for use
      * as the callback argument.
@@ -5555,21 +4642,13 @@
      * If we are going to use script tags, this returns a string to use as the
      * callback GET param.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype._prepare_callback = function (callback, data) {
-=======
-    MixpanelLib.prototype._prepare_callback = function(callback, data) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (_.isUndefined(callback)) {
             return null;
         }
 
         if (USE_XHR) {
-<<<<<<< HEAD
             var callback_function = function (response) {
-=======
-            var callback_function = function(response) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 callback(response, data);
             };
             return callback_function;
@@ -5580,11 +4659,7 @@
             var jsc = this['_jsc'];
             var randomized_cb = '' + Math.floor(Math.random() * 100000000);
             var callback_string = this.get_config('callback_fn') + '[' + randomized_cb + ']';
-<<<<<<< HEAD
             jsc[randomized_cb] = function (response) {
-=======
-            jsc[randomized_cb] = function(response) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 delete jsc[randomized_cb];
                 callback(response, data);
             };
@@ -5592,11 +4667,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype._send_request = function (url, data, options, callback) {
-=======
-    MixpanelLib.prototype._send_request = function(url, data, options, callback) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var succeeded = true;
 
         if (ENQUEUE_REQUESTS) {
@@ -5641,11 +4712,7 @@
             }
         }
 
-<<<<<<< HEAD
         data['ip'] = this.get_config('ip') ? 1 : 0;
-=======
-        data['ip'] = this.get_config('ip')?1:0;
->>>>>>> 7bd87d6 (Version bumped to latest)
         data['_'] = new Date().getTime().toString();
 
         if (use_post) {
@@ -5683,11 +4750,7 @@
                 if (use_post) {
                     headers['Content-Type'] = 'application/x-www-form-urlencoded';
                 }
-<<<<<<< HEAD
                 _.each(headers, function (headerValue, headerName) {
-=======
-                _.each(headers, function(headerValue, headerName) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     req.setRequestHeader(headerName, headerValue);
                 });
 
@@ -5734,11 +4797,7 @@
                             lib.report_error(error);
                             if (callback) {
                                 if (verbose_mode) {
-<<<<<<< HEAD
                                     callback({ status: 0, error: error, xhr_req: req });
-=======
-                                    callback({status: 0, error: error, xhr_req: req});
->>>>>>> 7bd87d6 (Version bumped to latest)
                                 } else {
                                     callback(0);
                                 }
@@ -5776,32 +4835,18 @@
      *
      * @param {Array} array
      */
-<<<<<<< HEAD
     MixpanelLib.prototype._execute_array = function (array) {
         var fn_name, alias_calls = [], other_calls = [], tracking_calls = [];
         _.each(array, function (item) {
-=======
-    MixpanelLib.prototype._execute_array = function(array) {
-        var fn_name, alias_calls = [], other_calls = [], tracking_calls = [];
-        _.each(array, function(item) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (item) {
                 fn_name = item[0];
                 if (_.isArray(fn_name)) {
                     tracking_calls.push(item); // chained call e.g. mixpanel.get_group().set()
-<<<<<<< HEAD
                 } else if (typeof (item) === 'function') {
                     item.call(this);
                 } else if (_.isArray(item) && fn_name === 'alias') {
                     alias_calls.push(item);
                 } else if (_.isArray(item) && fn_name.indexOf('track') !== -1 && typeof (this[fn_name]) === 'function') {
-=======
-                } else if (typeof(item) === 'function') {
-                    item.call(this);
-                } else if (_.isArray(item) && fn_name === 'alias') {
-                    alias_calls.push(item);
-                } else if (_.isArray(item) && fn_name.indexOf('track') !== -1 && typeof(this[fn_name]) === 'function') {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     tracking_calls.push(item);
                 } else {
                     other_calls.push(item);
@@ -5809,21 +4854,12 @@
             }
         }, this);
 
-<<<<<<< HEAD
         var execute = function (calls, context) {
             _.each(calls, function (item) {
                 if (_.isArray(item[0])) {
                     // chained call
                     var caller = context;
                     _.each(item, function (call) {
-=======
-        var execute = function(calls, context) {
-            _.each(calls, function(item) {
-                if (_.isArray(item[0])) {
-                    // chained call
-                    var caller = context;
-                    _.each(item, function(call) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                         caller = caller[call[0]].apply(caller, call.slice(1));
                     });
                 } else {
@@ -5839,7 +4875,6 @@
 
     // request queueing utils
 
-<<<<<<< HEAD
     MixpanelLib.prototype.are_batchers_initialized = function () {
         return !!this.request_batchers.events;
     };
@@ -5851,41 +4886,18 @@
             events: { type: 'events', endpoint: '/' + api_routes['track'], queue_key: queue_prefix + '_ev' },
             people: { type: 'people', endpoint: '/' + api_routes['engage'], queue_key: queue_prefix + '_pp' },
             groups: { type: 'groups', endpoint: '/' + api_routes['groups'], queue_key: queue_prefix + '_gr' }
-=======
-    MixpanelLib.prototype.are_batchers_initialized = function() {
-        return !!this.request_batchers.events;
-    };
-
-    MixpanelLib.prototype.get_batcher_configs = function() {
-        var queue_prefix = '__mpq_' + this.get_config('token');
-        var api_routes = this.get_config('api_routes');
-        this._batcher_configs = this._batcher_configs || {
-            events: {type: 'events', endpoint: '/' + api_routes['track'], queue_key: queue_prefix + '_ev'},
-            people: {type: 'people', endpoint: '/' + api_routes['engage'], queue_key: queue_prefix + '_pp'},
-            groups: {type: 'groups', endpoint: '/' + api_routes['groups'], queue_key: queue_prefix + '_gr'}
->>>>>>> 7bd87d6 (Version bumped to latest)
         };
         return this._batcher_configs;
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype.init_batchers = function () {
         if (!this.are_batchers_initialized()) {
             var batcher_for = _.bind(function (attrs) {
-=======
-    MixpanelLib.prototype.init_batchers = function() {
-        if (!this.are_batchers_initialized()) {
-            var batcher_for = _.bind(function(attrs) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 return new RequestBatcher(
                     attrs.queue_key,
                     {
                         libConfig: this['config'],
-<<<<<<< HEAD
                         sendRequestFunc: _.bind(function (data, options, cb) {
-=======
-                        sendRequestFunc: _.bind(function(data, options, cb) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                             this._send_request(
                                 this.get_config('api_host') + attrs.endpoint,
                                 this._encode_data_for_request(data),
@@ -5893,11 +4905,7 @@
                                 this._prepare_callback(cb, data)
                             );
                         }, this),
-<<<<<<< HEAD
                         beforeSendHook: _.bind(function (item) {
-=======
-                        beforeSendHook: _.bind(function(item) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                             return this._run_hook('before_send_' + attrs.type, item);
                         }, this),
                         errorReporter: this.get_config('error_reporter'),
@@ -5917,33 +4925,19 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype.start_batch_senders = function () {
         this._batchers_were_started = true;
         if (this.are_batchers_initialized()) {
             this._batch_requests = true;
             _.each(this.request_batchers, function (batcher) {
-=======
-    MixpanelLib.prototype.start_batch_senders = function() {
-        this._batchers_were_started = true;
-        if (this.are_batchers_initialized()) {
-            this._batch_requests = true;
-            _.each(this.request_batchers, function(batcher) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 batcher.start();
             });
         }
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype.stop_batch_senders = function () {
         this._batch_requests = false;
         _.each(this.request_batchers, function (batcher) {
-=======
-    MixpanelLib.prototype.stop_batch_senders = function() {
-        this._batch_requests = false;
-        _.each(this.request_batchers, function(batcher) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             batcher.stop();
             batcher.clear();
         });
@@ -5961,11 +4955,7 @@
      *
      * @param {Array} item A [function_name, args...] array to be executed
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.push = function (item) {
-=======
-    MixpanelLib.prototype.push = function(item) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this._execute_array([item]);
     };
 
@@ -5980,41 +4970,24 @@
      *
      * @param {Array} [events] An array of event names to disable
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.disable = function (events) {
         if (typeof (events) === 'undefined') {
-=======
-    MixpanelLib.prototype.disable = function(events) {
-        if (typeof(events) === 'undefined') {
->>>>>>> 7bd87d6 (Version bumped to latest)
             this._flags.disable_all_events = true;
         } else {
             this.__disabled_events = this.__disabled_events.concat(events);
         }
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype._encode_data_for_request = function (data) {
-=======
-    MixpanelLib.prototype._encode_data_for_request = function(data) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var encoded_data = _.JSONEncode(data);
         if (this.get_config('api_payload_format') === PAYLOAD_TYPE_BASE64) {
             encoded_data = _.base64Encode(encoded_data);
         }
-<<<<<<< HEAD
         return { 'data': encoded_data };
     };
 
     // internal method for handling track vs batch-enqueue logic
     MixpanelLib.prototype._track_or_batch = function (options, callback) {
-=======
-        return {'data': encoded_data};
-    };
-
-    // internal method for handling track vs batch-enqueue logic
-    MixpanelLib.prototype._track_or_batch = function(options, callback) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var truncated_data = _.truncate(options.data, 255);
         var endpoint = options.endpoint;
         var batcher = options.batcher;
@@ -6023,11 +4996,7 @@
         callback = callback || NOOP_FUNC;
 
         var request_enqueued_or_initiated = true;
-<<<<<<< HEAD
         var send_request_immediately = _.bind(function () {
-=======
-        var send_request_immediately = _.bind(function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (!send_request_options.skip_hooks) {
                 truncated_data = this._run_hook('before_send_' + options.type, truncated_data);
             }
@@ -6046,11 +5015,7 @@
         }, this);
 
         if (this._batch_requests && !should_send_immediately) {
-<<<<<<< HEAD
             batcher.enqueue(truncated_data, function (succeeded) {
-=======
-            batcher.enqueue(truncated_data, function(succeeded) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 if (succeeded) {
                     callback(1, truncated_data);
                 } else {
@@ -6087,11 +5052,7 @@
      * @returns {Boolean|Object} If the tracking request was successfully initiated/queued, an object
      * with the tracking payload sent to the API server is returned; otherwise false.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.track = addOptOutCheckMixpanelLib(function (event_name, properties, options, callback) {
-=======
-    MixpanelLib.prototype.track = addOptOutCheckMixpanelLib(function(event_name, properties, options, callback) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (!callback && typeof options === 'function') {
             callback = options;
             options = null;
@@ -6133,8 +5094,6 @@
             ? _.info.marketingParams()
             : {};
 
-<<<<<<< HEAD
-=======
         if (this._recorder) {
             var replay_id = this._recorder['replayId'];
             if (replay_id) {
@@ -6142,7 +5101,6 @@
             }
         }
 
->>>>>>> 7bd87d6 (Version bumped to latest)
         // note: extend writes to the first object, so lets make sure we
         // don't write to the persistence properties object and info
         // properties object by passing in a new object
@@ -6150,11 +5108,7 @@
         // update properties with pageview info and super-properties
         properties = _.extend(
             {},
-<<<<<<< HEAD
-            _.info.properties(),
-=======
-            _.info.properties({'mp_loader': this.get_config('mp_loader')}),
->>>>>>> 7bd87d6 (Version bumped to latest)
+            _.info.properties({ 'mp_loader': this.get_config('mp_loader') }),
             marketing_properties,
             this['persistence'].properties(),
             this.unpersisted_superprops,
@@ -6163,11 +5117,7 @@
 
         var property_blacklist = this.get_config('property_blacklist');
         if (_.isArray(property_blacklist)) {
-<<<<<<< HEAD
             _.each(property_blacklist, function (blacklisted_prop) {
-=======
-            _.each(property_blacklist, function(blacklisted_prop) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 delete properties[blacklisted_prop];
             });
         } else {
@@ -6190,7 +5140,6 @@
         return ret;
     });
 
-<<<<<<< HEAD
     // Tectonic apps specific method
     MixpanelLib.prototype.get_properties = function () {
         var properties = _.extend(
@@ -6204,8 +5153,6 @@
         return properties;
     };
 
-=======
->>>>>>> 7bd87d6 (Version bumped to latest)
     /**
      * Register the current user into one/many groups.
      *
@@ -6220,11 +5167,7 @@
      * @param {Function} [callback] If provided, the callback will be called after tracking the event.
      *
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.set_group = addOptOutCheckMixpanelLib(function (group_key, group_ids, callback) {
-=======
-    MixpanelLib.prototype.set_group = addOptOutCheckMixpanelLib(function(group_key, group_ids, callback) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (!_.isArray(group_ids)) {
             group_ids = [group_ids];
         }
@@ -6245,11 +5188,7 @@
      * @param {*} group_id A valid Mixpanel property type
      * @param {Function} [callback] If provided, the callback will be called after tracking the event.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.add_group = addOptOutCheckMixpanelLib(function (group_key, group_id, callback) {
-=======
-    MixpanelLib.prototype.add_group = addOptOutCheckMixpanelLib(function(group_key, group_id, callback) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var old_values = this.get_property(group_key);
         var prop = {};
         if (old_values === undefined) {
@@ -6276,22 +5215,14 @@
      * @param {*} group_id A valid Mixpanel property type
      * @param {Function} [callback] If provided, the callback will be called after tracking the event.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.remove_group = addOptOutCheckMixpanelLib(function (group_key, group_id, callback) {
-=======
-    MixpanelLib.prototype.remove_group = addOptOutCheckMixpanelLib(function(group_key, group_id, callback) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var old_value = this.get_property(group_key);
         // if the value doesn't exist, the persistent store is unchanged
         if (old_value !== undefined) {
             var idx = old_value.indexOf(group_id);
             if (idx > -1) {
                 old_value.splice(idx, 1);
-<<<<<<< HEAD
                 this.register({ group_key: old_value });
-=======
-                this.register({group_key: old_value});
->>>>>>> 7bd87d6 (Version bumped to latest)
             }
             if (old_value.length === 0) {
                 this.unregister(group_key);
@@ -6312,15 +5243,9 @@
      * @param {Object=} groups An object mapping group name keys to one or more values
      * @param {Function} [callback] If provided, the callback will be called after tracking the event.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.track_with_groups = addOptOutCheckMixpanelLib(function (event_name, properties, groups, callback) {
         var tracking_props = _.extend({}, properties || {});
         _.each(groups, function (v, k) {
-=======
-    MixpanelLib.prototype.track_with_groups = addOptOutCheckMixpanelLib(function(event_name, properties, groups, callback) {
-        var tracking_props = _.extend({}, properties || {});
-        _.each(groups, function(v, k) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (v !== null && v !== undefined) {
                 tracking_props[k] = v;
             }
@@ -6360,16 +5285,9 @@
 
     /**
      * Track a default Mixpanel page view event, which includes extra default event properties to
-<<<<<<< HEAD
-     * improve page view data. The `config.track_pageview` option for <a href="#mixpanelinit">mixpanel.init()</a>
-     * may be turned on for tracking page loads automatically.
-     *
-     * ### Usage
-=======
      * improve page view data.
      *
      * ### Usage:
->>>>>>> 7bd87d6 (Version bumped to latest)
      *
      *     // track a default $mp_web_page_view event
      *     mixpanel.track_pageview();
@@ -6386,8 +5304,6 @@
      *     // views on different products or internal applications that are considered completely separate
      *     mixpanel.track_pageview({'page': 'customer-search'}, {'event_name': '[internal] Admin Page View'});
      *
-<<<<<<< HEAD
-=======
      * ### Notes:
      *
      * The `config.track_pageview` option for <a href="#mixpanelinit">mixpanel.init()</a>
@@ -6405,18 +5321,13 @@
      *     // track when the path changes, ignoring any query parameter or hash changes
      *     mixpanel.init(PROJECT_TOKEN, {track_pageview: 'url-with-path'});
      *
->>>>>>> 7bd87d6 (Version bumped to latest)
      * @param {Object} [properties] An optional set of additional properties to send with the page view event
      * @param {Object} [options] Page view tracking options
      * @param {String} [options.event_name] - Alternate name for the tracking event
      * @returns {Boolean|Object} If the tracking request was successfully initiated/queued, an object
      * with the tracking payload sent to the API server is returned; otherwise false.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.track_pageview = addOptOutCheckMixpanelLib(function (properties, options) {
-=======
-    MixpanelLib.prototype.track_pageview = addOptOutCheckMixpanelLib(function(properties, options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (typeof properties !== 'object') {
             properties = {};
         }
@@ -6466,11 +5377,7 @@
      * @param {String} event_name The name of the event to track
      * @param {Object|Function} [properties] A properties object or function that returns a dictionary of properties when passed a DOMElement
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.track_links = function () {
-=======
-    MixpanelLib.prototype.track_links = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return this._track_dom.call(this, LinkTracker, arguments);
     };
 
@@ -6501,11 +5408,7 @@
      * @param {String} event_name The name of the event to track
      * @param {Object|Function} [properties] This can be a set of properties, or a function that returns a set of properties after being passed a DOMElement
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.track_forms = function () {
-=======
-    MixpanelLib.prototype.track_forms = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return this._track_dom.call(this, FormTracker, arguments);
     };
 
@@ -6526,11 +5429,7 @@
      *
      * @param {String} event_name The name of the event.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.time_event = function (event_name) {
-=======
-    MixpanelLib.prototype.time_event = function(event_name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (_.isUndefined(event_name)) {
             this.report_error('No event name provided to mixpanel.time_event');
             return;
@@ -6540,11 +5439,7 @@
             return;
         }
 
-<<<<<<< HEAD
         this['persistence'].set_event_timer(event_name, new Date().getTime());
-=======
-        this['persistence'].set_event_timer(event_name,  new Date().getTime());
->>>>>>> 7bd87d6 (Version bumped to latest)
     };
 
     var REGISTER_DEFAULTS = {
@@ -6556,20 +5451,12 @@
      * @param {Number|Object} [days_or_options] 'days' option (Number), or Options object for register methods
      * @returns {Object} options object
      */
-<<<<<<< HEAD
     var options_for_register = function (days_or_options) {
-=======
-    var options_for_register = function(days_or_options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var options;
         if (_.isObject(days_or_options)) {
             options = days_or_options;
         } else if (!_.isUndefined(days_or_options)) {
-<<<<<<< HEAD
             options = { 'days': days_or_options };
-=======
-            options = {'days': days_or_options};
->>>>>>> 7bd87d6 (Version bumped to latest)
         } else {
             options = {};
         }
@@ -6599,11 +5486,7 @@
      * @param {boolean} [days_or_options.days] - number of days since the user's last visit to store the super properties (only valid for persisted props)
      * @param {boolean} [days_or_options.persistent=true] - whether to put in persistent storage (cookie/localStorage)
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.register = function (props, days_or_options) {
-=======
-    MixpanelLib.prototype.register = function(props, days_or_options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var options = options_for_register(days_or_options);
         if (options['persistent']) {
             this['persistence'].register(props, options['days']);
@@ -6639,26 +5522,15 @@
      * @param {boolean} [days_or_options.days] - number of days since the user's last visit to store the super properties (only valid for persisted props)
      * @param {boolean} [days_or_options.persistent=true] - whether to put in persistent storage (cookie/localStorage)
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.register_once = function (props, default_value, days_or_options) {
-=======
-    MixpanelLib.prototype.register_once = function(props, default_value, days_or_options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var options = options_for_register(days_or_options);
         if (options['persistent']) {
             this['persistence'].register_once(props, default_value, options['days']);
         } else {
-<<<<<<< HEAD
             if (typeof (default_value) === 'undefined') {
                 default_value = 'None';
             }
             _.each(props, function (val, prop) {
-=======
-            if (typeof(default_value) === 'undefined') {
-                default_value = 'None';
-            }
-            _.each(props, function(val, prop) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 if (!this.unpersisted_superprops.hasOwnProperty(prop) || this.unpersisted_superprops[prop] === default_value) {
                     this.unpersisted_superprops[prop] = val;
                 }
@@ -6673,11 +5545,7 @@
      * @param {Object} [options]
      * @param {boolean} [options.persistent=true] - whether to look in persistent storage (cookie/localStorage)
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.unregister = function (property, options) {
-=======
-    MixpanelLib.prototype.unregister = function(property, options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         options = options_for_register(options);
         if (options['persistent']) {
             this['persistence'].unregister(property);
@@ -6686,11 +5554,7 @@
         }
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype._register_single = function (prop, value) {
-=======
-    MixpanelLib.prototype._register_single = function(prop, value) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var props = {};
         props[prop] = value;
         this.register(props);
@@ -6720,11 +5584,7 @@
      *
      * @param {String} [unique_id] A string that uniquely identifies a user. If not provided, the distinct_id currently in the persistent store (cookie or localStorage) will be used.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.identify = function (
-=======
-    MixpanelLib.prototype.identify = function(
->>>>>>> 7bd87d6 (Version bumped to latest)
         new_distinct_id, _set_callback, _add_callback, _append_callback, _set_once_callback, _union_callback, _unset_callback, _remove_callback
     ) {
         // Optional Parameters
@@ -6743,11 +5603,7 @@
                 this.report_error('distinct_id cannot have $device: prefix');
                 return -1;
             }
-<<<<<<< HEAD
             this.register({ '$user_id': new_distinct_id });
-=======
-            this.register({'$user_id': new_distinct_id});
->>>>>>> 7bd87d6 (Version bumped to latest)
         }
 
         if (!this.get_property('$device_id')) {
@@ -6764,11 +5620,7 @@
         // if it's new, blow away the alias as well.
         if (new_distinct_id !== previous_distinct_id && new_distinct_id !== this.get_property(ALIAS_ID_KEY)) {
             this.unregister(ALIAS_ID_KEY);
-<<<<<<< HEAD
             this.register({ 'distinct_id': new_distinct_id });
-=======
-            this.register({'distinct_id': new_distinct_id});
->>>>>>> 7bd87d6 (Version bumped to latest)
         }
         this._flags.identify_called = true;
         // Flush any queued up people requests
@@ -6780,11 +5632,7 @@
             this.track('$identify', {
                 'distinct_id': new_distinct_id,
                 '$anon_distinct_id': previous_distinct_id
-<<<<<<< HEAD
             }, { skip_hooks: true });
-=======
-            }, {skip_hooks: true});
->>>>>>> 7bd87d6 (Version bumped to latest)
         }
     };
 
@@ -6792,11 +5640,7 @@
      * Clears super properties and generates a new random distinct_id for this instance.
      * Useful for clearing data when a user logs out.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.reset = function () {
-=======
-    MixpanelLib.prototype.reset = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this['persistence'].clear();
         this._flags.identify_called = false;
         var uuid = _.UUID();
@@ -6822,11 +5666,7 @@
      *         }
      *     });
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.get_distinct_id = function () {
-=======
-    MixpanelLib.prototype.get_distinct_id = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return this.get_property('distinct_id');
     };
 
@@ -6866,11 +5706,7 @@
      * @param {String} alias A unique identifier that you want to use for this user in the future.
      * @param {String} [original] The current identifier being used for this user.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.alias = function (alias, original) {
-=======
-    MixpanelLib.prototype.alias = function(alias, original) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         // If the $people_distinct_id key exists in persistence, there has been a previous
         // mixpanel.people.identify() call made for this user. It is VERY BAD to make an alias with
         // this ID, as it will duplicate users.
@@ -6890,11 +5726,7 @@
                 'distinct_id': original
             }, {
                 skip_hooks: true
-<<<<<<< HEAD
             }, function () {
-=======
-            }, function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 // Flush the people queue
                 _this.identify(alias);
             });
@@ -6916,11 +5748,7 @@
      * @param {String} name_tag A human readable name for the user
      * @deprecated
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.name_tag = function (name_tag) {
-=======
-    MixpanelLib.prototype.name_tag = function(name_tag) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         this._register_single('mp_name_tag', name_tag);
     };
 
@@ -7057,21 +5885,13 @@
      *
      * @param {Object} config A dictionary of new configuration values to update
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.set_config = function (config) {
-=======
-    MixpanelLib.prototype.set_config = function(config) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         if (_.isObject(config)) {
             _.extend(this['config'], config);
 
             var new_batch_size = config['batch_size'];
             if (new_batch_size) {
-<<<<<<< HEAD
                 _.each(this.request_batchers, function (batcher) {
-=======
-                _.each(this.request_batchers, function(batcher) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                     batcher.resetBatchSize();
                 });
             }
@@ -7093,11 +5913,7 @@
     /**
      * returns the current config object for the library.
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.get_config = function (prop_name) {
-=======
-    MixpanelLib.prototype.get_config = function(prop_name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return this['config'][prop_name];
     };
 
@@ -7107,11 +5923,7 @@
      * @param {string} hook_name which hook to retrieve
      * @returns {any|null} return value of user-provided hook, or null if nothing was returned
      */
-<<<<<<< HEAD
     MixpanelLib.prototype._run_hook = function (hook_name) {
-=======
-    MixpanelLib.prototype._run_hook = function(hook_name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var ret = (this['config']['hooks'][hook_name] || IDENTITY_FUNC).apply(this, slice.call(arguments, 1));
         if (typeof ret === 'undefined') {
             this.report_error(hook_name + ' hook did not return a value');
@@ -7138,19 +5950,11 @@
      *
      * @param {String} property_name The name of the super property you want to retrieve
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.get_property = function (property_name) {
         return this['persistence'].load_prop([property_name]);
     };
 
     MixpanelLib.prototype.toString = function () {
-=======
-    MixpanelLib.prototype.get_property = function(property_name) {
-        return this['persistence'].load_prop([property_name]);
-    };
-
-    MixpanelLib.prototype.toString = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var name = this.get_config('name');
         if (name !== PRIMARY_INSTANCE_NAME) {
             name = PRIMARY_INSTANCE_NAME + '.' + name;
@@ -7158,39 +5962,23 @@
         return name;
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype._event_is_disabled = function (event_name) {
-=======
-    MixpanelLib.prototype._event_is_disabled = function(event_name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return _.isBlockedUA(userAgent) ||
             this._flags.disable_all_events ||
             _.include(this.__disabled_events, event_name);
     };
 
     // perform some housekeeping around GDPR opt-in/out state
-<<<<<<< HEAD
     MixpanelLib.prototype._gdpr_init = function () {
-=======
-    MixpanelLib.prototype._gdpr_init = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var is_localStorage_requested = this.get_config('opt_out_tracking_persistence_type') === 'localStorage';
 
         // try to convert opt-in/out cookies to localStorage if possible
         if (is_localStorage_requested && _.localStorage.is_supported()) {
-<<<<<<< HEAD
             if (!this.has_opted_in_tracking() && this.has_opted_in_tracking({ 'persistence_type': 'cookie' })) {
                 this.opt_in_tracking({ 'enable_persistence': false });
             }
             if (!this.has_opted_out_tracking() && this.has_opted_out_tracking({ 'persistence_type': 'cookie' })) {
                 this.opt_out_tracking({ 'clear_persistence': false });
-=======
-            if (!this.has_opted_in_tracking() && this.has_opted_in_tracking({'persistence_type': 'cookie'})) {
-                this.opt_in_tracking({'enable_persistence': false});
-            }
-            if (!this.has_opted_out_tracking() && this.has_opted_out_tracking({'persistence_type': 'cookie'})) {
-                this.opt_out_tracking({'clear_persistence': false});
->>>>>>> 7bd87d6 (Version bumped to latest)
             }
             this.clear_opt_in_out_tracking({
                 'persistence_type': 'cookie',
@@ -7200,19 +5988,11 @@
 
         // check whether the user has already opted out - if so, clear & disable persistence
         if (this.has_opted_out_tracking()) {
-<<<<<<< HEAD
             this._gdpr_update_persistence({ 'clear_persistence': true });
 
             // check whether we should opt out by default
             // note: we don't clear persistence here by default since opt-out default state is often
             //       used as an initial state while GDPR information is being collected
-=======
-            this._gdpr_update_persistence({'clear_persistence': true});
-
-        // check whether we should opt out by default
-        // note: we don't clear persistence here by default since opt-out default state is often
-        //       used as an initial state while GDPR information is being collected
->>>>>>> 7bd87d6 (Version bumped to latest)
         } else if (!this.has_opted_in_tracking() && (
             this.get_config('opt_out_tracking_by_default') || _.cookie.get('mp_optout')
         )) {
@@ -7229,11 +6009,7 @@
      * @param {boolean} [options.clear_persistence] If true, will delete all data stored by the sdk in persistence and disable it
      * @param {boolean} [options.enable_persistence] If true, will re-enable sdk persistence
      */
-<<<<<<< HEAD
     MixpanelLib.prototype._gdpr_update_persistence = function (options) {
-=======
-    MixpanelLib.prototype._gdpr_update_persistence = function(options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         var disabled;
         if (options && options['clear_persistence']) {
             disabled = true;
@@ -7259,11 +6035,7 @@
     };
 
     // call a base gdpr function after constructing the appropriate token and options args
-<<<<<<< HEAD
     MixpanelLib.prototype._gdpr_call_func = function (func, options) {
-=======
-    MixpanelLib.prototype._gdpr_call_func = function(func, options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         options = _.extend({
             'track': _.bind(this.track, this),
             'persistence_type': this.get_config('opt_out_tracking_persistence_type'),
@@ -7299,11 +6071,7 @@
     /**
      * Opt the user in to data tracking and cookies/localstorage for this Mixpanel instance
      *
-<<<<<<< HEAD
-     * ### Usage
-=======
      * ### Usage:
->>>>>>> 7bd87d6 (Version bumped to latest)
      *
      *     // opt user in
      *     mixpanel.opt_in_tracking();
@@ -7331,11 +6099,7 @@
      * @param {boolean} [options.cross_subdomain_cookie] Whether the opt-in cookie is set as cross-subdomain or not (overrides value specified in this Mixpanel instance's config)
      * @param {boolean} [options.secure_cookie] Whether the opt-in cookie is set as secure or not (overrides value specified in this Mixpanel instance's config)
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.opt_in_tracking = function (options) {
-=======
-    MixpanelLib.prototype.opt_in_tracking = function(options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         options = _.extend({
             'enable_persistence': true
         }, options);
@@ -7347,11 +6111,7 @@
     /**
      * Opt the user out of data tracking and cookies/localstorage for this Mixpanel instance
      *
-<<<<<<< HEAD
-     * ### Usage
-=======
      * ### Usage:
->>>>>>> 7bd87d6 (Version bumped to latest)
      *
      *     // opt user out
      *     mixpanel.opt_out_tracking();
@@ -7373,11 +6133,7 @@
      * @param {boolean} [options.cross_subdomain_cookie] Whether the opt-in cookie is set as cross-subdomain or not (overrides value specified in this Mixpanel instance's config)
      * @param {boolean} [options.secure_cookie] Whether the opt-in cookie is set as secure or not (overrides value specified in this Mixpanel instance's config)
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.opt_out_tracking = function (options) {
-=======
-    MixpanelLib.prototype.opt_out_tracking = function(options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         options = _.extend({
             'clear_persistence': true,
             'delete_user': true
@@ -7396,11 +6152,7 @@
     /**
      * Check whether the user has opted in to data tracking and cookies/localstorage for this Mixpanel instance
      *
-<<<<<<< HEAD
-     * ### Usage
-=======
      * ### Usage:
->>>>>>> 7bd87d6 (Version bumped to latest)
      *
      *     var has_opted_in = mixpanel.has_opted_in_tracking();
      *     // use has_opted_in value
@@ -7410,22 +6162,14 @@
      * @param {string} [options.cookie_prefix=__mp_opt_in_out] Custom prefix to be used in the cookie/localstorage name
      * @returns {boolean} current opt-in status
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.has_opted_in_tracking = function (options) {
-=======
-    MixpanelLib.prototype.has_opted_in_tracking = function(options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return this._gdpr_call_func(hasOptedIn, options);
     };
 
     /**
      * Check whether the user has opted out of data tracking and cookies/localstorage for this Mixpanel instance
      *
-<<<<<<< HEAD
-     * ### Usage
-=======
      * ### Usage:
->>>>>>> 7bd87d6 (Version bumped to latest)
      *
      *     var has_opted_out = mixpanel.has_opted_out_tracking();
      *     // use has_opted_out value
@@ -7435,22 +6179,14 @@
      * @param {string} [options.cookie_prefix=__mp_opt_in_out] Custom prefix to be used in the cookie/localstorage name
      * @returns {boolean} current opt-out status
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.has_opted_out_tracking = function (options) {
-=======
-    MixpanelLib.prototype.has_opted_out_tracking = function(options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         return this._gdpr_call_func(hasOptedOut, options);
     };
 
     /**
      * Clear the user's opt in/out status of data tracking and cookies/localstorage for this Mixpanel instance
      *
-<<<<<<< HEAD
-     * ### Usage
-=======
      * ### Usage:
->>>>>>> 7bd87d6 (Version bumped to latest)
      *
      *     // clear user's opt-in/out status
      *     mixpanel.clear_opt_in_out_tracking();
@@ -7472,11 +6208,7 @@
      * @param {boolean} [options.cross_subdomain_cookie] Whether the opt-in cookie is set as cross-subdomain or not (overrides value specified in this Mixpanel instance's config)
      * @param {boolean} [options.secure_cookie] Whether the opt-in cookie is set as secure or not (overrides value specified in this Mixpanel instance's config)
      */
-<<<<<<< HEAD
     MixpanelLib.prototype.clear_opt_in_out_tracking = function (options) {
-=======
-    MixpanelLib.prototype.clear_opt_in_out_tracking = function(options) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         options = _.extend({
             'enable_persistence': true
         }, options);
@@ -7485,22 +6217,14 @@
         this._gdpr_update_persistence(options);
     };
 
-<<<<<<< HEAD
     MixpanelLib.prototype.report_error = function (msg, err) {
-=======
-    MixpanelLib.prototype.report_error = function(msg, err) {
->>>>>>> 7bd87d6 (Version bumped to latest)
         console.error.apply(console.error, arguments);
         try {
             if (!err && !(msg instanceof Error)) {
                 msg = new Error(msg);
             }
             this.get_config('error_reporter')(msg, err);
-<<<<<<< HEAD
         } catch (err) {
-=======
-        } catch(err) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             console.error(err);
         }
     };
@@ -7508,7 +6232,6 @@
     // EXPORTS (for closure compiler)
 
     // MixpanelLib Exports
-<<<<<<< HEAD
     MixpanelLib.prototype['init'] = MixpanelLib.prototype.init;
     MixpanelLib.prototype['reset'] = MixpanelLib.prototype.reset;
     MixpanelLib.prototype['disable'] = MixpanelLib.prototype.disable;
@@ -7540,6 +6263,8 @@
     MixpanelLib.prototype['track_with_groups'] = MixpanelLib.prototype.track_with_groups;
     MixpanelLib.prototype['start_batch_senders'] = MixpanelLib.prototype.start_batch_senders;
     MixpanelLib.prototype['stop_batch_senders'] = MixpanelLib.prototype.stop_batch_senders;
+    MixpanelLib.prototype['start_session_recording'] = MixpanelLib.prototype.start_session_recording;
+    MixpanelLib.prototype['stop_session_recording'] = MixpanelLib.prototype.stop_session_recording;
     MixpanelLib.prototype['DEFAULT_API_ROUTES'] = DEFAULT_API_ROUTES;
     MixpanelLib.prototype['get_properties'] = MixpanelLib.prototype.get_properties;
 
@@ -7555,55 +6280,6 @@
     var extend_mp = function () {
         // add all the sub mixpanel instances
         _.each(instances, function (instance, name) {
-=======
-    MixpanelLib.prototype['init']                      = MixpanelLib.prototype.init;
-    MixpanelLib.prototype['reset']                     = MixpanelLib.prototype.reset;
-    MixpanelLib.prototype['disable']                   = MixpanelLib.prototype.disable;
-    MixpanelLib.prototype['time_event']                = MixpanelLib.prototype.time_event;
-    MixpanelLib.prototype['track']                     = MixpanelLib.prototype.track;
-    MixpanelLib.prototype['track_links']               = MixpanelLib.prototype.track_links;
-    MixpanelLib.prototype['track_forms']               = MixpanelLib.prototype.track_forms;
-    MixpanelLib.prototype['track_pageview']            = MixpanelLib.prototype.track_pageview;
-    MixpanelLib.prototype['register']                  = MixpanelLib.prototype.register;
-    MixpanelLib.prototype['register_once']             = MixpanelLib.prototype.register_once;
-    MixpanelLib.prototype['unregister']                = MixpanelLib.prototype.unregister;
-    MixpanelLib.prototype['identify']                  = MixpanelLib.prototype.identify;
-    MixpanelLib.prototype['alias']                     = MixpanelLib.prototype.alias;
-    MixpanelLib.prototype['name_tag']                  = MixpanelLib.prototype.name_tag;
-    MixpanelLib.prototype['set_config']                = MixpanelLib.prototype.set_config;
-    MixpanelLib.prototype['get_config']                = MixpanelLib.prototype.get_config;
-    MixpanelLib.prototype['get_property']              = MixpanelLib.prototype.get_property;
-    MixpanelLib.prototype['get_distinct_id']           = MixpanelLib.prototype.get_distinct_id;
-    MixpanelLib.prototype['toString']                  = MixpanelLib.prototype.toString;
-    MixpanelLib.prototype['opt_out_tracking']          = MixpanelLib.prototype.opt_out_tracking;
-    MixpanelLib.prototype['opt_in_tracking']           = MixpanelLib.prototype.opt_in_tracking;
-    MixpanelLib.prototype['has_opted_out_tracking']    = MixpanelLib.prototype.has_opted_out_tracking;
-    MixpanelLib.prototype['has_opted_in_tracking']     = MixpanelLib.prototype.has_opted_in_tracking;
-    MixpanelLib.prototype['clear_opt_in_out_tracking'] = MixpanelLib.prototype.clear_opt_in_out_tracking;
-    MixpanelLib.prototype['get_group']                 = MixpanelLib.prototype.get_group;
-    MixpanelLib.prototype['set_group']                 = MixpanelLib.prototype.set_group;
-    MixpanelLib.prototype['add_group']                 = MixpanelLib.prototype.add_group;
-    MixpanelLib.prototype['remove_group']              = MixpanelLib.prototype.remove_group;
-    MixpanelLib.prototype['track_with_groups']         = MixpanelLib.prototype.track_with_groups;
-    MixpanelLib.prototype['start_batch_senders']       = MixpanelLib.prototype.start_batch_senders;
-    MixpanelLib.prototype['stop_batch_senders']        = MixpanelLib.prototype.stop_batch_senders;
-    MixpanelLib.prototype['start_session_recording']   = MixpanelLib.prototype.start_session_recording;
-    MixpanelLib.prototype['stop_session_recording']    = MixpanelLib.prototype.stop_session_recording;
-    MixpanelLib.prototype['DEFAULT_API_ROUTES']        = DEFAULT_API_ROUTES;
-
-    // MixpanelPersistence Exports
-    MixpanelPersistence.prototype['properties']            = MixpanelPersistence.prototype.properties;
-    MixpanelPersistence.prototype['update_search_keyword'] = MixpanelPersistence.prototype.update_search_keyword;
-    MixpanelPersistence.prototype['update_referrer_info']  = MixpanelPersistence.prototype.update_referrer_info;
-    MixpanelPersistence.prototype['get_cross_subdomain']   = MixpanelPersistence.prototype.get_cross_subdomain;
-    MixpanelPersistence.prototype['clear']                 = MixpanelPersistence.prototype.clear;
-
-
-    var instances = {};
-    var extend_mp = function() {
-        // add all the sub mixpanel instances
-        _.each(instances, function(instance, name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (name !== PRIMARY_INSTANCE_NAME) { mixpanel_master[name] = instance; }
         });
 
@@ -7611,17 +6287,10 @@
         mixpanel_master['_'] = _;
     };
 
-<<<<<<< HEAD
     var override_mp_init_func = function () {
         // we override the snippets init function to handle the case where a
         // user initializes the mixpanel library after the script loads & runs
         mixpanel_master['init'] = function (token, config, name) {
-=======
-    var override_mp_init_func = function() {
-        // we override the snippets init function to handle the case where a
-        // user initializes the mixpanel library after the script loads & runs
-        mixpanel_master['init'] = function(token, config, name) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             if (name) {
                 // initialize a sub library
                 if (!mixpanel_master[name]) {
@@ -7644,22 +6313,14 @@
 
                 mixpanel_master = instance;
                 if (init_type === INIT_SNIPPET) {
-<<<<<<< HEAD
-                    window$1[PRIMARY_INSTANCE_NAME] = mixpanel_master;
-=======
                     win[PRIMARY_INSTANCE_NAME] = mixpanel_master;
->>>>>>> 7bd87d6 (Version bumped to latest)
                 }
                 extend_mp();
             }
         };
     };
 
-<<<<<<< HEAD
     var add_dom_loaded_handler = function () {
-=======
-    var add_dom_loaded_handler = function() {
->>>>>>> 7bd87d6 (Version bumped to latest)
         // Cross browser DOM Loaded support
         function dom_loaded_handler() {
             // function flag since we only want to execute this once
@@ -7669,11 +6330,7 @@
             DOM_LOADED = true;
             ENQUEUE_REQUESTS = false;
 
-<<<<<<< HEAD
             _.each(instances, function (inst) {
-=======
-            _.each(instances, function(inst) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 inst._dom_loaded();
             });
         }
@@ -7681,11 +6338,7 @@
         function do_scroll_check() {
             try {
                 document$1.documentElement.doScroll('left');
-<<<<<<< HEAD
             } catch (e) {
-=======
-            } catch(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
                 setTimeout(do_scroll_check, 1);
                 return;
             }
@@ -7710,13 +6363,8 @@
             // check to make sure we arn't in a frame
             var toplevel = false;
             try {
-<<<<<<< HEAD
-                toplevel = window$1.frameElement === null;
-            } catch (e) {
-=======
                 toplevel = win.frameElement === null;
-            } catch(e) {
->>>>>>> 7bd87d6 (Version bumped to latest)
+            } catch (e) {
                 // noop
             }
 
@@ -7726,20 +6374,12 @@
         }
 
         // fallback handler, always will work
-<<<<<<< HEAD
-        _.register_event(window$1, 'load', dom_loaded_handler, true);
-=======
         _.register_event(win, 'load', dom_loaded_handler, true);
->>>>>>> 7bd87d6 (Version bumped to latest)
     };
 
     function init_from_snippet() {
         init_type = INIT_SNIPPET;
-<<<<<<< HEAD
-        mixpanel_master = window$1[PRIMARY_INSTANCE_NAME];
-=======
         mixpanel_master = win[PRIMARY_INSTANCE_NAME];
->>>>>>> 7bd87d6 (Version bumped to latest)
 
         // Initialization
         if (_.isUndefined(mixpanel_master)) {
@@ -7760,15 +6400,9 @@
         }
 
         // Load instances of the Mixpanel Library
-<<<<<<< HEAD
         _.each(mixpanel_master['_i'], function (item) {
             if (item && _.isArray(item)) {
                 instances[item[item.length - 1]] = create_mplib.apply(this, item);
-=======
-        _.each(mixpanel_master['_i'], function(item) {
-            if (item && _.isArray(item)) {
-                instances[item[item.length-1]] = create_mplib.apply(this, item);
->>>>>>> 7bd87d6 (Version bumped to latest)
             }
         });
 
@@ -7776,25 +6410,15 @@
         mixpanel_master['init']();
 
         // Fire loaded events after updating the window's mixpanel object
-<<<<<<< HEAD
         _.each(instances, function (instance) {
-=======
-        _.each(instances, function(instance) {
->>>>>>> 7bd87d6 (Version bumped to latest)
             instance._loaded();
         });
 
         add_dom_loaded_handler();
     }
 
-<<<<<<< HEAD
-    init_from_snippet();
-
-}());
-=======
     /* eslint camelcase: "off" */
 
     init_from_snippet();
 
 })();
->>>>>>> 7bd87d6 (Version bumped to latest)
